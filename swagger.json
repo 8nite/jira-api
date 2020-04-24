@@ -1,0 +1,406 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a API-Jira server.",
+        "version": "0.0.1",
+        "title": "Jira-API",
+        "termsOfService": ""
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Get Jira Objects",
+            "description": "on JIRA"
+        },
+        {
+            "name": "Create Jira Objects",
+            "description": "Objects, Types, Attribute"
+        },
+        {
+            "name": "Get SQL"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/getOBjectinType": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "14"
+                    },
+                    {
+                        "name": "ObjectType",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "HKNOC-Customer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/objectschema/list": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/0createObjectSchema": {
+            "get": {
+                "tags": [
+                    "Create Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "HGC_API_TEST"
+                    },
+                    {
+                        "name": "objectSchemaKey",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "HGCAPI"
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Testing for API RESTful"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/1createObjectTypeCustomer": {
+            "get": {
+                "tags": [
+                    "Create Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CustomerTest"
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "default": null
+                    },
+                    {
+                        "name": "iconId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "1"
+                    },
+                    {
+                        "name": "parentObjectTypeId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "default": null
+                    },
+                    {
+                        "name": "objectSchemaId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "14"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/2createObjectTypeInnerCustomer": {
+            "get": {
+                "tags": [
+                    "Create Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "DC-Customer"
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "default": null
+                    },
+                    {
+                        "name": "iconId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "2"
+                    },
+                    {
+                        "name": "parentObjectTypeId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "198"
+                    },
+                    {
+                        "name": "objectSchemaId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "14"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/3createObjectTypeAttribute": {
+            "get": {
+                "tags": [
+                    "Create Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectType",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "199"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Account number"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "0"
+                    },
+                    {
+                        "name": "defaultTypeId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/4objectCreate": {
+            "post": {
+                "tags": [
+                    "Create Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "passObjects",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/objectAttribute"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "objectAttribute": {
+            "type": "object",
+            "properties": {
+                "objectTypeId": {
+                    "type": "string",
+                    "enum": "199"
+                },
+                "passObjects": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "1883": {
+                                "type": "string",
+                                "enum": "TEST"
+                            },
+                            "1891": {
+                                "type": "string",
+                                "enum": "123456789"
+                            },
+                            "1890": {
+                                "type": "string",
+                                "enum": "TESTName"
+                            },
+                            "1893": {
+                                "type": "string",
+                                "enum": "TESTAlias"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
