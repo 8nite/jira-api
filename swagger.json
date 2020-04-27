@@ -25,7 +25,7 @@
         "http"
     ],
     "paths": {
-        "/getOBjectinType": {
+        "/jira/getOBjectinType": {
             "get": {
                 "tags": [
                     "Get Jira Objects"
@@ -45,7 +45,7 @@
                         "in": "query",
                         "required": true,
                         "type": "string",
-                        "default": "14"
+                        "default": "12"
                     },
                     {
                         "name": "ObjectType",
@@ -68,7 +68,7 @@
                 }
             }
         },
-        "/objectschema/list": {
+        "/jira/objectschema/list": {
             "get": {
                 "tags": [
                     "Get Jira Objects"
@@ -95,7 +95,7 @@
                 }
             }
         },
-        "/0createObjectSchema": {
+        "/jira/0createObjectSchema": {
             "get": {
                 "tags": [
                     "Create Jira Objects"
@@ -145,7 +145,7 @@
                 }
             }
         },
-        "/1createObjectTypeCustomer": {
+        "/jira/1createObjectTypeCustomer": {
             "get": {
                 "tags": [
                     "Create Jira Objects"
@@ -209,7 +209,7 @@
                 }
             }
         },
-        "/2createObjectTypeInnerCustomer": {
+        "/jira/2createObjectTypeInnerCustomer": {
             "get": {
                 "tags": [
                     "Create Jira Objects"
@@ -273,7 +273,7 @@
                 }
             }
         },
-        "/3createObjectTypeAttribute": {
+        "/jira/3createObjectTypeAttribute": {
             "get": {
                 "tags": [
                     "Create Jira Objects"
@@ -330,7 +330,7 @@
                 }
             }
         },
-        "/4objectCreate": {
+        "/jira/4objectCreate": {
             "post": {
                 "tags": [
                     "Create Jira Objects"
