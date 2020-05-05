@@ -101,7 +101,7 @@ router.post('/4objectCreate', function (req, res, next) {
       })
   });
   
-  router.get('/1createObjectTypeCustomer', function (req, res, next) {
+  router.get('/1createObjectType', function (req, res, next) {
     var options = {
       method: 'POST',
       auth: {
