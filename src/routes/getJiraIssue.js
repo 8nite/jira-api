@@ -1,11 +1,11 @@
-var express = require('express');
-var rp = require('request-promise');
+import express from 'express'
+import rp from 'request-promise'
 
-var router = express.Router();
+const router = express.Router();
 
 router.get('/issueFields', function (req, res, next) {
   //console.log(req.body)
-  var options = {
+  const options = {
     method: 'GET',
     auth: {
       'username': 'tnssapi',
@@ -38,7 +38,7 @@ router.get('/issueFields', function (req, res, next) {
 
 router.get('/issueTypes', function (req, res, next) {
   //console.log(req.body)
-  var options = {
+  const options = {
     method: 'GET',
     auth: {
       'username': 'tnssapi',
@@ -60,7 +60,7 @@ router.get('/issueTypes', function (req, res, next) {
 
 router.get('/issueTypeNametoId', function (req, res, next) {
   //console.log(req.body)
-  var options = {
+  const options = {
     method: 'GET',
     auth: {
       'username': 'tnssapi',

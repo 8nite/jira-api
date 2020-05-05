@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm-run-all build server",
-    "dev": "nodemon src/bin/www/.",
+    "dev": "nodemon --watch src/ --exec yarn start",
     "server": "node ./dist-server/app",
     "transpile": "babel ./src --out-dir dist-server",
     "clean": "rimraf dist-server",
@@ -17,6 +17,7 @@
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "@babel/register": "^7.8.3",
+    "babel-polyfill": "^6.26.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

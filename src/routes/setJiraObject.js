@@ -1,7 +1,7 @@
-var express = require('express');
-var rp = require('request-promise');
+import express from 'express'
+import rp from 'request-promise'
 
-var router = express.Router();
+const router = express.Router();
 
 router.post('/4objectCreate', function (req, res, next) {
     let attributes = []
@@ -15,7 +15,7 @@ router.post('/4objectCreate', function (req, res, next) {
       })
     })
   
-    var options = {
+    const options = {
       method: 'POST',
       auth: {
         'user': 'herbert',
@@ -42,7 +42,7 @@ router.post('/4objectCreate', function (req, res, next) {
   
   const createObjectTypeAttribute = (async (objectType, name, type, defaultTypeId) => {
     return new Promise(async (resolve, reject) => {
-      var options = {
+      const options = {
         method: 'POST',
         auth: {
           'user': 'herbert',
@@ -74,7 +74,7 @@ router.post('/4objectCreate', function (req, res, next) {
   });
   
   router.get('/2createObjectTypeInnerCustomer', function (req, res, next) {
-    var options = {
+    const options = {
       method: 'POST',
       auth: {
         'user': 'herbert',
@@ -102,7 +102,7 @@ router.post('/4objectCreate', function (req, res, next) {
   });
   
   router.get('/1createObjectType', function (req, res, next) {
-    var options = {
+    const options = {
       method: 'POST',
       auth: {
         'user': 'herbert',
@@ -130,7 +130,7 @@ router.post('/4objectCreate', function (req, res, next) {
   });
   
   router.get('/0createObjectSchema', function (req, res, next) {
-    var options = {
+    const options = {
       method: 'POST',
       auth: {
         'user': 'herbert',

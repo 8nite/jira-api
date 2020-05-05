@@ -1,10 +1,10 @@
-var express = require('express');
-var rp = require('request-promise');
+import express from 'express'
+import rp from 'request-promise'
 
-var router = express.Router();
+const router = express.Router();
 
 router.get('/objectSchemaNametoID', function (req, res, next) {
-  var options = {
+  const options = {
     auth: {
       'user': 'herbert',
       'pass': 'qwer1234'
@@ -29,7 +29,7 @@ router.get('/objectSchemaNametoID', function (req, res, next) {
 });
 
 router.get('/objectSchemaKeytoID', function (req, res, next) {
-  var options = {
+  const options = {
     auth: {
       'user': 'herbert',
       'pass': 'qwer1234'
@@ -54,7 +54,7 @@ router.get('/objectSchemaKeytoID', function (req, res, next) {
 });
 
 router.get('/objectTypeNametoID', function (req, res, next) {
-  var options = {
+  const options = {
     auth: {
       'user': 'herbert',
       'pass': 'qwer1234'
@@ -79,7 +79,7 @@ router.get('/objectTypeNametoID', function (req, res, next) {
 });
 
 router.get('/objectNametoID', function (req, res, next) {
-  var options = {
+  const options = {
     auth: {
       'user': 'herbert',
       'pass': 'qwer1234'

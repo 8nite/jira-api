@@ -6,7 +6,7 @@
         "title": "Jira-API",
         "termsOfService": ""
     },
-    "host": "localhost:3000",
+    "host": "",
     "basePath": "/",
     "tags": [
         {

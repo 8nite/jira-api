@@ -1,11 +1,11 @@
-var express = require('express');
-var rp = require('request-promise');
+import express from 'express'
+import rp from 'request-promise'
 
-var router = express.Router();
+const router = express.Router();
 
 router.post('/createIssue', function (req, res, next) {
   console.log(req.body)
-  var options = {
+  const options = {
     method: 'POST',
     auth: {
       'username': 'tnssapi',
@@ -30,7 +30,7 @@ router.post('/createIssue', function (req, res, next) {
 });
 
 const getFieldsIdbyNames = (async (createIssueByName) => {
-  var options = {
+  const options = {
     uri: 'http://localhost:3000/get/jira/issue/issueFields?projectIdOrKey=AM&issueTypeId=10502',
     json: true,
   }
@@ -65,7 +65,7 @@ router.post('/createIssueByName', (async (req, res, next) => {
   newJson = await getFieldsIdbyNames(req.body.createIssueByName)
 
   //console.log(newJson)
-  var options = {
+  const options = {
     method: 'POST',
     auth: {
       'username': 'tnssapi',
@@ -90,7 +90,7 @@ router.post('/createIssueByName', (async (req, res, next) => {
 
 router.post('/updateIssue', function (req, res, next) {
   console.log(req.body)
-  var options = {
+  const options = {
     method: 'PUT',
     auth: {
       'username': 'tnssapi',

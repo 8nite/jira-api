@@ -1,14 +1,13 @@
-var express = require('express');
-var rp = require('request-promise');
-var mysql = require('mysql');
+import express  from 'express'
+import mysql  from 'mysql'
 
-var router = express.Router();
+const router = express.Router();
 
 router.get('/getSQL', function (req, res, next) {
   const query = `SELECT * from Service
 `
 
-  var con = mysql.createConnection({
+  const con = mysql.createConnection({
     host: '172.25.13.74',
     port: 3306,
     user: 'nttstest',
