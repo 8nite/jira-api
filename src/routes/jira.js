@@ -1,5 +1,6 @@
-var express = require('express');
-var rp = require('request-promise');
+import express from 'express'
+import 'babel-polyfill'
+import rp from 'request-promise';
 
 var router = express.Router();
 
