@@ -8,6 +8,12 @@ import debug from 'debug'
 import http from 'http'
 import indexRouter from './routes/index'
 
+require('dotenv').config()
+
+if (!process.env.LD_LIBRARY_PATH || process.env.LD_LIBRARY_PATH.length < 2) {
+  throw 'LD_LIBRARY_PATH not set!'
+}
+
 const app = express();
 
 // view engine setup
