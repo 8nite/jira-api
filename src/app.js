@@ -44,7 +44,7 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 
-//rp('http://localhost:3000/4objectCreate')
+//rp(process.env.LOCALHOST + '/4objectCreate')
 
 /**
  * Get port from environment and store in Express.

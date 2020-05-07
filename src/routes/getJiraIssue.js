@@ -9,7 +9,7 @@ router.get('/issueFields', function (req, res, next) {
     method: 'GET',
     auth: {
       'username': 'tnssapi',
-      'password': 'qwer1234'
+      'password': process.env.JIRAPASS
     },
     uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes/' + req.query.issueTypeId,
     json: true,
@@ -32,7 +32,7 @@ router.get('/issueFields', function (req, res, next) {
     })
     .catch(function (err) {
       console.log(err)
-      res.status(202).send(err)
+      res.status(500).send(err)
     })
 });
 
@@ -42,7 +42,7 @@ router.get('/issueTypes', function (req, res, next) {
     method: 'GET',
     auth: {
       'username': 'tnssapi',
-      'password': 'qwer1234'
+      'password': process.env.JIRAPASS
     },
     uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
     json: true
@@ -54,7 +54,7 @@ router.get('/issueTypes', function (req, res, next) {
     })
     .catch(function (err) {
       console.log(err)
-      res.status(202).send(err)
+      res.status(500).send(err)
     })
 });
 
@@ -64,7 +64,7 @@ router.get('/issueTypeNametoId', function (req, res, next) {
     method: 'GET',
     auth: {
       'username': 'tnssapi',
-      'password': 'qwer1234'
+      'password': process.env.JIRAPASS
     },
     uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
     json: true
@@ -76,7 +76,7 @@ router.get('/issueTypeNametoId', function (req, res, next) {
     })
     .catch(function (err) {
       console.log(err)
-      res.status(202).send(err)
+      res.status(500).send(err)
     })
 });
 

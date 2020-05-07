@@ -19,8 +19,8 @@ router.post('/4objectCreate', function (req, res, next) {
     const options = {
       method: 'POST',
       auth: {
-        'user': 'herbert',
-        'pass': 'qwer1234'
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
       },
       uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/create',
       json: true,
@@ -37,7 +37,7 @@ router.post('/4objectCreate', function (req, res, next) {
       })
       .catch(function (err) {
         console.log(err.message)
-        res.send(err)
+        res.status(500).send(err)
       })
   });
   
@@ -46,8 +46,8 @@ router.post('/4objectCreate', function (req, res, next) {
       const options = {
         method: 'POST',
         auth: {
-          'user': 'herbert',
-          'pass': 'qwer1234'
+          'user': process.env.JIRAUSER,
+          'pass': process.env.JIRAPASS
         },
         uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttypeattribute/' + objectType,
         json: true,
@@ -78,8 +78,8 @@ router.post('/4objectCreate', function (req, res, next) {
     const options = {
       method: 'POST',
       auth: {
-        'user': 'herbert',
-        'pass': 'qwer1234'
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
       },
       uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/create',
       json: true,
@@ -98,7 +98,7 @@ router.post('/4objectCreate', function (req, res, next) {
         res.send($)
       })
       .catch(function (err) {
-        res.send(err)
+        res.status(500).send(err)
       })
   });
   
@@ -106,8 +106,8 @@ router.post('/4objectCreate', function (req, res, next) {
     const options = {
       method: 'POST',
       auth: {
-        'user': 'herbert',
-        'pass': 'qwer1234'
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
       },
       uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/create',
       json: true,
@@ -126,7 +126,7 @@ router.post('/4objectCreate', function (req, res, next) {
         res.send($)
       })
       .catch(function (err) {
-        res.send(err)
+        res.status(500).send(err)
       })
   });
   
@@ -134,8 +134,8 @@ router.post('/4objectCreate', function (req, res, next) {
     const options = {
       method: 'POST',
       auth: {
-        'user': 'herbert',
-        'pass': 'qwer1234'
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
       },
       uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/create',
       json: true,
@@ -152,7 +152,7 @@ router.post('/4objectCreate', function (req, res, next) {
         res.send($)
       })
       .catch(function (err) {
-        res.send(err)
+        res.status(500).send(err)
       })
   });
   
@@ -160,8 +160,8 @@ router.post('/4objectCreate', function (req, res, next) {
   router.get('/getOBjectinType', function (req, res, next) {
     const options = {
       auth: {
-        'user': 'herbert',
-        'pass': 'qwer1234'
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
       },
       uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.ObjectType + '&resultPerPage=10',
       json: true
@@ -173,7 +173,7 @@ router.post('/4objectCreate', function (req, res, next) {
         res.send($)
       })
       .catch(function (err) {
-        res.send(err)
+        res.status(500).send(err)
       })
   });
   
@@ -181,8 +181,8 @@ router.post('/4objectCreate', function (req, res, next) {
   router.get('/objectschema/list', function (req, res, next) {
     const options = {
       auth: {
-        'user': 'herbert',
-        'pass': 'qwer1234'
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
       },
       uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/list',
       json: true
@@ -195,7 +195,7 @@ router.post('/4objectCreate', function (req, res, next) {
       })
       .catch(function (err) {
         console.log(err)
-        res.send(err)
+        res.status(500).send(err)
       })
   });
 

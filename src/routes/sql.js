@@ -66,7 +66,7 @@ router.get('/getSQL', async (req, res, next) => {
         console.error('connected!')
         if (err) { console.error(err); return; }
         connection.execute(
-          "select * from AA",
+          "select * from TNSS.JIRA_CPE_TYPE",
           function(err, result)
           {
             if (err) { console.error(err); return; }

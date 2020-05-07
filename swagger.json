@@ -10,7 +10,7 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "Get Jira Translate",
+            "name": "Get Jira Objects",
             "description": "on JIRA"
         },
         {
@@ -72,8 +72,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -99,8 +102,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -149,8 +155,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -213,8 +222,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -277,8 +289,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -334,8 +349,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -371,8 +389,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -398,8 +419,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -407,7 +431,7 @@
         "/get/jira/object/objectSchemaNametoID": {
             "get": {
                 "tags": [
-                    "Get Jira Translate"
+                    "Get Jira Objects"
                 ],
                 "summary": "",
                 "description": "",
@@ -434,8 +458,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -443,7 +470,7 @@
         "/get/jira/object/objectSchemaKeytoID": {
             "get": {
                 "tags": [
-                    "Get Jira Translate"
+                    "Get Jira Objects"
                 ],
                 "summary": "",
                 "description": "",
@@ -470,8 +497,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -479,7 +509,7 @@
         "/get/jira/object/objectTypeNametoID": {
             "get": {
                 "tags": [
-                    "Get Jira Translate"
+                    "Get Jira Objects"
                 ],
                 "summary": "",
                 "description": "",
@@ -513,8 +543,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -522,7 +555,7 @@
         "/get/jira/object/objectNametoID": {
             "get": {
                 "tags": [
-                    "Get Jira Translate"
+                    "Get Jira Objects"
                 ],
                 "summary": "",
                 "description": "",
@@ -556,8 +589,103 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/object/objects": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "16"
+                    },
+                    {
+                        "name": "objectTypeId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "202"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/object/objectsWithNames": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Asset Management"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CPE Type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -593,8 +721,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -630,8 +761,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -667,8 +801,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -703,8 +840,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -746,8 +886,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -789,8 +932,11 @@
                             "type": "string"
                         }
                     },
-                    "400": {
-                        "description": "Invalid username/password supplied"
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }

@@ -1,5 +1,6 @@
 import express from 'express'
 import rp from 'request-promise'
+require('dotenv').config()
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.post('/createIssue', function (req, res, next) {
     method: 'POST',
     auth: {
       'username': 'tnssapi',
-      'password': 'qwer1234'
+      'password': process.env.JIRAPASS
     },
     uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/',
     json: true,
@@ -25,13 +26,13 @@ router.post('/createIssue', function (req, res, next) {
     })
     .catch(function (err) {
       console.log(err)
-      res.status(202).send(err)
+      res.status(500).send(err)
     })
 });
 
 const getFieldsIdbyNames = (async (createIssueByName) => {
   const options = {
-    uri: 'http://localhost:3000/get/jira/issue/issueFields?projectIdOrKey=AM&issueTypeId=10502',
+    uri: process.env.LOCALHOST + '/get/jira/issue/issueFields?projectIdOrKey=AM&issueTypeId=10502',
     json: true,
   }
 
@@ -69,7 +70,7 @@ router.post('/createIssueByName', (async (req, res, next) => {
     method: 'POST',
     auth: {
       'username': 'tnssapi',
-      'password': 'qwer1234'
+      'password': process.env.JIRAPASS
     },
     uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/',
     json: true,
@@ -84,7 +85,7 @@ router.post('/createIssueByName', (async (req, res, next) => {
     })
     .catch(function (err) {
       console.log(err)
-      res.status(202).send(err)
+      res.status(500).send(err)
     })
 }))
 
@@ -94,7 +95,7 @@ router.post('/updateIssue', function (req, res, next) {
     method: 'PUT',
     auth: {
       'username': 'tnssapi',
-      'password': 'qwer1234'
+      'password': process.env.JIRAPASS
     },
     uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/' + req.body.updateIssue.issueId,
     json: true,
@@ -110,7 +111,7 @@ router.post('/updateIssue', function (req, res, next) {
     })
     .catch(function (err) {
       console.log(err)
-      res.status(202).send(err)
+      res.status(500).send(err)
     })
 });
 
