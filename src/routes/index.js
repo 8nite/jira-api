@@ -6,6 +6,7 @@ var setJiraObject = require('./setJiraObject');
 var getJiraIssue = require('./getJiraIssue');
 var setJiraIssue = require('./setJiraIssue');
 var sql = require('./sql');
+var jiraWebhooks = require('./jiraWebhooks');
 
 var router = express.Router();
 
@@ -15,5 +16,6 @@ router.use('/set/jira/object', setJiraObject);
 router.use('/get/jira/issue', getJiraIssue);
 router.use('/set/jira/issue', setJiraIssue);
 router.use('/sql', sql);
+router.use('/jiraWebhooks', jiraWebhooks);
 
 module.exports = router;

@@ -428,6 +428,126 @@
                 }
             }
         },
+        "/sql/insertSQL": {
+            "post": {
+                "tags": [
+                    "Get SQL"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sql",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sqlinfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sql/updateSQL": {
+            "post": {
+                "tags": [
+                    "Get SQL"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sqlUpdate",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sqlUpdateDef"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sql/deleteSQL": {
+            "post": {
+                "tags": [
+                    "Get SQL"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sqlDelete",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sqlDeleteDef"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/get/jira/object/objectSchemaNametoID": {
             "get": {
                 "tags": [
@@ -626,6 +746,45 @@
                         "required": true,
                         "type": "string",
                         "default": "202"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/object/object": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "255694"
                     }
                 ],
                 "responses": {
@@ -1180,6 +1339,67 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "sqlinfo": {
+            "type": "object",
+            "properties": {
+                "sql": {
+                    "type": "object",
+                    "properties": {
+                        "tableName": {
+                            "type": "string",
+                            "enum": "DSBS.JIRA_CPE_TYPE"
+                        },
+                        "values": {
+                            "example": [
+                                "123",
+                                "123",
+                                "123",
+                                "2020-05-07 07:25:07",
+                                "123",
+                                "2020-05-07 07:25:07"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "sqlUpdateDef": {
+            "type": "object",
+            "properties": {
+                "tableName": {
+                    "type": "string",
+                    "enum": "DSBS.JIRA_CPE_TYPE"
+                },
+                "find": {
+                    "example": {
+                        "JIRA_ID": 123
+                    }
+                },
+                "values": {
+                    "example": {
+                        "CPE_TYPE": 123,
+                        "CREATEDBY": 123,
+                        "CREATEDDATE": "2020-05-07 07:25:07",
+                        "UPDATEDBY": 123,
+                        "UPDATEDDATE": "2020-05-07 07:25:07"
+                    }
+                }
+            }
+        },
+        "sqlDeleteDef": {
+            "type": "object",
+            "properties": {
+                "tableName": {
+                    "type": "string",
+                    "enum": "DSBS.JIRA_CPE_TYPE"
+                },
+                "find": {
+                    "example": {
+                        "JIRA_ID": 123
                     }
                 }
             }

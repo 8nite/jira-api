@@ -128,7 +128,32 @@ router.get('/objects', function (req, res, next) {
 
   rp(options)
     .then(function ($) {
-      res.status(200).json($.map((row) => { return row.label }))
+      res.status(200).json($)
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
+router.get('/object', function (req, res, next) {
+  let options = {
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
+    },
+    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/' + req.query.objectId + '',
+    json: true
+  }
+
+  rp(options)
+    .then(function ($) {
+      options.uri = 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/' + req.query.objectId + '/history'
+      rp(options).then ((history) => {
+        const ret = $
+        ret.history = history
+        res.status(200).json(ret)
+      })
     })
     .catch(function (err) {
       console.log(err)
