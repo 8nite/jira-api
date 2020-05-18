@@ -199,4 +199,27 @@ router.post('/4objectCreate', function (req, res, next) {
       })
   });
 
+  router.get('/workflow/list', function (req, res, next) {
+    const options = {
+      auth: {
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
+      },
+      uri: 'https://jirasd-dev.hgc.com.hk/rest/api/3/field',
+      //uri: 'https://jirasd-dev.hgc.com.hk/rest/projectconfig/1/workflow?workflowName=TOC%20Change%20request%20AW&projectKey=TP',
+      //uri: 'https://jirasd-dev.hgc.com.hk/rest/projectconfig/latest/workflowscheme/TP',
+      json: true
+    }
+  
+    rp(options)
+      .then(function ($) {
+        console.log($)
+        res.send($)
+      })
+      .catch(function (err) {
+        console.log(err)
+        res.status(500).send(err)
+      })
+  });
+
   module.exports = router;

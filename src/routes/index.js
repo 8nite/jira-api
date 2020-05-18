@@ -9,7 +9,9 @@ var sql = require('./sql');
 var jiraWebhooks = require('./jiraWebhooks');
 
 var router = express.Router();
-
+router.get('/', function (req, res, next) {
+    res.send("1")
+})
 router.use('/get/jira', jira);
 router.use('/get/jira/object', getJiraObject);
 router.use('/set/jira/object', setJiraObject);

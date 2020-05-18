@@ -80,4 +80,35 @@ router.get('/issueTypeNametoId', function (req, res, next) {
     })
 });
 
+router.get('/allFields', function (req, res, next) {
+  //console.log(req.body)
+  const options = {
+    method: 'GET',
+    auth: {
+      'username': 'tnssapi',
+      'password': process.env.JIRAPASS
+    },
+    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/field',
+    json: true
+  }
+
+  rp(options)
+    .then(function ($) {
+      res.status(200).json($.sort(GetSortOrder()))
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
+function GetSortOrder(prop) {    
+  return function(a, b) {    
+      if (a.name > b.name) {    
+          return 1;    
+      }
+      return 0;    
+  }    
+}  
+
 module.exports = router;
