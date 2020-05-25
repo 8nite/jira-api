@@ -388,6 +388,45 @@
                 }
             }
         },
+        "/set/jira/object/deleteObject": {
+            "get": {
+                "tags": [
+                    "Create Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "255740"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/set/jira/object/4objectCreate": {
             "post": {
                 "tags": [
@@ -410,6 +449,106 @@
                         "schema": {
                             "$ref": "#/definitions/objectAttribute"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/set/jira/object/objectCreateSimple": {
+            "post": {
+                "tags": [
+                    "Create Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectCreateSimple",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/objectCreateSimpleDef"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sql/getTableData": {
+            "get": {
+                "tags": [
+                    "Get SQL"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [                    
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "dsbs"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "abc123"
+                    },
+                    {
+                        "name": "connString",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "172.25.15.138:1521/fbiu"
+                    },
+                    {
+                        "name": "tableName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "DSBS.JIRA_CPE_TYPE"
                     }
                 ],
                 "responses": {
@@ -834,6 +973,98 @@
             }
         },
         "/get/jira/object/objectsWithNames": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Asset Management"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CPE Type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/object/objectsWithNamesAttributes": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Asset Management"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CPE Type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/object/objectAttributesMapping": {
             "get": {
                 "tags": [
                     "Get Jira Objects"
@@ -1460,6 +1691,21 @@
                 "find": {
                     "example": {
                         "JIRA_ID": 123
+                    }
+                }
+            }
+        },
+        "objectCreateSimpleDef": {
+            "type": "object",
+            "properties": {
+                "add": {
+                    "example": {
+                        "objectSchemaName": "Asset Management",
+                        "objectTypeName": "ABC_TEST_SYNC",
+                        "values": [{
+                            "NAME":"Test1",
+                            "DETAIL":"DET1"
+                        }]
                     }
                 }
             }

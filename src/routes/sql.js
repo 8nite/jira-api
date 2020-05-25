@@ -5,6 +5,35 @@ import moment from 'moment'
 
 const router = express.Router();
 
+router.get('/getTableData', async (req, res, next) => {
+  oracledb.getConnection(
+    {
+      user: req.query.user,
+      password: req.query.password,
+      connectString: "NOC"
+    },
+    async function (err, connection) {
+      if (err) {
+        console.error(err, req.query.connString)
+        res.send(err)
+      }
+      const sql = "select * from " + req.query.tableName
+      let binds = {};
+
+      // For a complete list of options see the documentation.
+      let options = {
+        outFormat: oracledb.OUT_FORMAT_OBJECT   // query result format
+        // extendedMetaData: true,   // get extra metadata
+        // fetchArraySize: 100       // internal buffer allocation size for tuning
+      };
+
+      let result = await connection.execute(sql, binds, options);
+      console.log(result)
+      res.send(result)
+    })
+
+})
+
 router.get('/getSQL', async (req, res, next) => {
   oracledb.getConnection(
     {

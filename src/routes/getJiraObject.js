@@ -1,10 +1,11 @@
 import express from 'express'
 import rp from 'request-promise'
+import queryString from 'query-string'
 require('dotenv').config()
 
 const router = express.Router();
 
-router.get('/objectSchemaNametoID', function (req, res, next) {
+router.get('/objectSchemaNametoID', (req, res) => {
   const options = {
     auth: {
       'user': process.env.JIRAUSER,
@@ -149,7 +150,7 @@ router.get('/object', function (req, res, next) {
   rp(options)
     .then(function ($) {
       options.uri = 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/' + req.query.objectId + '/history'
-      rp(options).then ((history) => {
+      rp(options).then((history) => {
         const ret = $
         ret.history = history
         res.status(200).json(ret)
@@ -178,14 +179,14 @@ router.get('/objectsWithNames', function (req, res, next) {
       rp(options)
         .then(($) => {
           const objectTypeId = $.id
-          options.uri = process.env.LOCALHOST + '/get/jira/object/objects?objectTypeId=' + objectTypeId 
+          options.uri = process.env.LOCALHOST + '/get/jira/object/objects?objectTypeId=' + objectTypeId
           rp(options)
             .then(($) => {
               res.status(200).json($)
             })
             .catch(function (err) {
               console.log(err)
-              res.status(500).send({err})
+              res.status(500).send({ err })
             })
         })
         .catch(function (err) {
@@ -199,4 +200,146 @@ router.get('/objectsWithNames', function (req, res, next) {
     })
 });
 
+router.get('/objectsWithNamesAttributes', async (req, res) => {
+  let query = {
+    objectSchemaName: req.query.objectSchemaName,
+    objectTypeName: req.query.objectTypeName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectsWithNames?' + queryString.stringify(query),
+    json: true
+  }
+
+  let ret = await rp(options)
+    .then(($) => {
+      return $
+    })
+
+  let objects = await ret.map(async (item) => {
+    return await rp({
+      uri: process.env.LOCALHOST + '/get/jira/object/object?objectId=' + item.id.toString(),
+      json: true
+    }).then(($) => {
+      return $
+    })
+  })
+
+  Promise.all(objects).then((values) => {
+    let ret = values.map((row) => {
+      let item = {
+        id: row.id,
+        label: row.label
+      }
+      row.attributes.forEach((attr) => {
+        if (attr.objectAttributeValues[0] && attr.objectAttributeValues[0].value) {
+          item[attr.objectTypeAttribute.name] = attr.objectAttributeValues[0].value
+        }
+      })
+      return item
+    })
+    res.json(ret)
+  })
+})
+
+router.get('/schemaAndTypeId', async (req, res) => {
+  let query = {
+    name: req.query.objectSchemaName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectSchemaNametoID?' + queryString.stringify(query),
+    json: true
+  }
+
+  const objectSchemaId = await rp(options)
+    .then(($) => {
+      return $.id.toString()
+    })
+
+  query = {
+    objectSchemaId,
+    name: req.query.objectTypeName
+  }
+  options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectTypeNametoID?' + queryString.stringify(query),
+    json: true
+  }
+
+  const objectTypeId = await rp(options)
+    .then(($) => {
+      return $.id.toString()
+    })
+
+  res.json({ objectSchemaId, objectTypeId })
+})
+
+router.get('/objectAttributesMapping', async (req, res) => {
+  let query = {
+    objectSchemaName: req.query.objectSchemaName,
+    objectTypeName: req.query.objectTypeName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/schemaAndTypeId?' + queryString.stringify(query),
+    json: true
+  }
+
+  const { objectSchemaId, objectTypeId } = await rp(options)
+    .then(($) => {
+      return $
+    })
+
+  options = {
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
+    },
+    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/' + objectTypeId + '/attributes',
+    json: true
+  }
+
+  const ret = await rp(options)
+    .then(($) => {
+      return $.map((item) => {
+        let key = item.name
+        let id = item.id
+        return { [key]: id }
+      })
+    })
+
+  let oneJson = {}
+  ret.forEach((element) => {
+    oneJson[Object.keys(element)[0]] = element[Object.keys(element)[0]]
+  })
+
+  res.json(oneJson)
+
+})
+/*
+
+router.get('/objectAttributesMapping', async (req, res) => {
+  let query = {
+    objectSchemaName: req.query.objectSchemaName,
+    objectTypeName: req.query.objectTypeName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectsWithNamesAttributes?' + queryString.stringify(query),
+    json: true
+  }
+
+  let ret = await rp(options)
+    .then(($) => {
+      return $.map((attr) => {
+        let ret = {}
+        ret[attr.Name] = attr.id
+        return attr
+      })
+    })
+
+  let oneJson = {}
+  ret.forEach((element) => {
+    oneJson[Object.keys(element)[0]] = element[Object.keys(element)[0]]
+  })
+
+  res.send(ret)
+})
+*/
 module.exports = router;

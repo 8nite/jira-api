@@ -1,12 +1,13 @@
-var express = require('express');
-var rp = require('request-promise');
-var jira = require('./jira');
-var getJiraObject = require('./getJiraObject');
-var setJiraObject = require('./setJiraObject');
-var getJiraIssue = require('./getJiraIssue');
-var setJiraIssue = require('./setJiraIssue');
-var sql = require('./sql');
-var jiraWebhooks = require('./jiraWebhooks');
+import express from 'express'
+import jira from './jira'
+import getJiraObject from './getJiraObject'
+import setJiraObject from './setJiraObject'
+import getJiraIssue from './getJiraIssue'
+import setJiraIssue from './setJiraIssue'
+import sql from './sql'
+import jiraWebhooks from './jiraWebhooks'
+import TNSSDBSyncCMDB from './TNSS/DBSyncCMDB'
+import NOCDBSyncCMDB from './NOC/DBSyncCMDB'
 
 var router = express.Router();
 router.get('/', function (req, res, next) {
@@ -19,5 +20,8 @@ router.use('/get/jira/issue', getJiraIssue);
 router.use('/set/jira/issue', setJiraIssue);
 router.use('/sql', sql);
 router.use('/jiraWebhooks', jiraWebhooks);
+
+router.use('/TNSS/DBSyncCMDB', TNSSDBSyncCMDB);
+router.use('/NOC/DBSyncCMDB', NOCDBSyncCMDB);
 
 module.exports = router;
