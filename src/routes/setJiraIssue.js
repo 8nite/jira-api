@@ -12,7 +12,7 @@ router.post('/createIssue', function (req, res, next) {
       'username': 'tnssapi',
       'password': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/',
+    uri: process.env.JIRAURL + '/rest/api/2/issue/',
     json: true,
     body: {
       "fields": req.body.createIssue
@@ -72,7 +72,7 @@ router.post('/createIssueByName', (async (req, res, next) => {
       'username': 'tnssapi',
       'password': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/',
+    uri: process.env.JIRAURL + '/rest/api/2/issue/',
     json: true,
     body: {
       "fields": newJson
@@ -97,7 +97,7 @@ router.post('/updateIssue', function (req, res, next) {
       'username': 'tnssapi',
       'password': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/' + req.body.updateIssue.issueId,
+    uri: process.env.JIRAURL + '/rest/api/2/issue/' + req.body.updateIssue.issueId,
     json: true,
     body: {
       "update": req.body.updateIssue.body

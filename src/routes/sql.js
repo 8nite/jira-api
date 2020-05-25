@@ -2,6 +2,7 @@ import express from 'express'
 import mysql from 'mysql'
 import oracledb from 'oracledb'
 import moment from 'moment'
+require('dotenv').config()
 
 const router = express.Router();
 

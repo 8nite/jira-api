@@ -24,7 +24,7 @@ router.post('/4objectCreate', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/object/create',
     json: true,
     body: {
       "objectTypeId": req.body.objectTypeId,
@@ -51,7 +51,7 @@ const createObjectTypeAttribute = (async (objectType, name, type, defaultTypeId)
         'user': process.env.JIRAUSER,
         'pass': process.env.JIRAPASS
       },
-      uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttypeattribute/' + objectType,
+      uri: process.env.JIRAURL + '/rest/insight/1.0/objecttypeattribute/' + objectType,
       json: true,
       body: {
         "name": name,
@@ -83,7 +83,7 @@ router.get('/2createObjectTypeInnerCustomer', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/create',
     json: true,
     body: {
       "name": req.query.name,
@@ -111,7 +111,7 @@ router.get('/1createObjectType', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/create',
     json: true,
     body: {
       "name": req.query.name,
@@ -139,7 +139,7 @@ router.get('/0createObjectSchema', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/create',
     json: true,
     body: {
       "name": req.query.name,
@@ -165,7 +165,7 @@ router.get('/getOBjectinType', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.ObjectType + '&resultPerPage=10',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.ObjectType + '&resultPerPage=10',
     json: true
   }
 
@@ -186,7 +186,7 @@ router.get('/objectschema/list', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/list',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/list',
     json: true
   }
 
@@ -207,9 +207,9 @@ router.get('/workflow/list', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/3/field',
-    //uri: 'https://jirasd-dev.hgc.com.hk/rest/projectconfig/1/workflow?workflowName=TOC%20Change%20request%20AW&projectKey=TP',
-    //uri: 'https://jirasd-dev.hgc.com.hk/rest/projectconfig/latest/workflowscheme/TP',
+    uri: process.env.JIRAURL + '/rest/api/3/field',
+    //uri: process.env.JIRAURL + '/rest/projectconfig/1/workflow?workflowName=TOC%20Change%20request%20AW&projectKey=TP',
+    //uri: process.env.JIRAURL + '/rest/projectconfig/latest/workflowscheme/TP',
     json: true
   }
 

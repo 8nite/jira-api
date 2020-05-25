@@ -84,7 +84,7 @@ router.post('/4objectCreate', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/object/create',
     json: true,
     body: {
       "objectTypeId": req.body.objectTypeId,
@@ -110,7 +110,7 @@ router.get('/deleteObject', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/' + req.query.id,
+    uri: process.env.JIRAURL + '/rest/insight/1.0/object/' + req.query.id,
     json: true,
   }
 
@@ -132,7 +132,7 @@ const createObjectTypeAttribute = (async (objectType, name, type, defaultTypeId)
         'user': process.env.JIRAUSER,
         'pass': process.env.JIRAPASS
       },
-      uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttypeattribute/' + objectType,
+      uri: process.env.JIRAURL + '/rest/insight/1.0/objecttypeattribute/' + objectType,
       json: true,
       body: {
         "name": name,
@@ -164,7 +164,7 @@ router.get('/2createObjectTypeInnerCustomer', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/create',
     json: true,
     body: {
       "name": req.query.name,
@@ -192,7 +192,7 @@ router.get('/1createObjectType', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/create',
     json: true,
     body: {
       "name": req.query.name,
@@ -220,7 +220,7 @@ router.get('/0createObjectSchema', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/create',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/create',
     json: true,
     body: {
       "name": req.query.name,

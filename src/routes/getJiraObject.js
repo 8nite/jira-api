@@ -11,7 +11,7 @@ router.get('/objectSchemaNametoID', (req, res) => {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/list',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/list',
     json: true
   }
 
@@ -36,7 +36,7 @@ router.get('/objectSchemaKeytoID', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/list',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/list',
     json: true
   }
 
@@ -61,7 +61,7 @@ router.get('/objectTypeNametoID', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objectschema/' + req.query.objectSchemaId + '/objecttypes/flat',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/' + req.query.objectSchemaId + '/objecttypes/flat',
     json: true
   }
 
@@ -86,7 +86,7 @@ router.get('/objectNametoID', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.objectType + '&resultPerPage=999',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.objectType + '&resultPerPage=999',
     json: true
   }
 
@@ -123,7 +123,7 @@ router.get('/objects', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/' + req.query.objectTypeId + '/objects',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/' + req.query.objectTypeId + '/objects',
     json: true
   }
 
@@ -143,13 +143,13 @@ router.get('/object', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/' + req.query.objectId + '',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/object/' + req.query.objectId + '',
     json: true
   }
 
   rp(options)
     .then(function ($) {
-      options.uri = 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/object/' + req.query.objectId + '/history'
+      options.uri = process.env.JIRAURL + '/rest/insight/1.0/object/' + req.query.objectId + '/history'
       rp(options).then((history) => {
         const ret = $
         ret.history = history
@@ -292,7 +292,7 @@ router.get('/objectAttributesMapping', async (req, res) => {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/insight/1.0/objecttype/' + objectTypeId + '/attributes',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/' + objectTypeId + '/attributes',
     json: true
   }
 

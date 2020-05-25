@@ -1,5 +1,6 @@
 import express from 'express'
 import rp from 'request-promise'
+require('dotenv').config()
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get('/issueFields', function (req, res, next) {
       'username': 'tnssapi',
       'password': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes/' + req.query.issueTypeId,
+    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes/' + req.query.issueTypeId,
     json: true,
   }
 
@@ -44,7 +45,7 @@ router.get('/issueTypes', function (req, res, next) {
       'username': 'tnssapi',
       'password': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
+    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
     json: true
   }
 
@@ -66,7 +67,7 @@ router.get('/issueTypeNametoId', function (req, res, next) {
       'username': 'tnssapi',
       'password': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
+    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
     json: true
   }
 
@@ -88,7 +89,7 @@ router.get('/allFields', function (req, res, next) {
       'username': 'tnssapi',
       'password': process.env.JIRAPASS
     },
-    uri: 'https://jirasd-dev.hgc.com.hk/rest/api/2/field',
+    uri: process.env.JIRAURL + '/rest/api/2/field',
     json: true
   }
 
