@@ -58,12 +58,30 @@ router.post('/objectCreateSimple', async (req, res, next) => {
     body: oneJson
   }
 
-  const result = await rp(options)
-    .then(($) => {
-      return $
+  if (oneJson.passObjects.length > 1) {
+    asyncForEach(oneJson.passObjects, async (passObject) => {
+      let recOpt = {
+        method: 'POST',
+        uri: process.env.LOCALHOST + '/set/jira/object/4objectCreate',
+        json: true,
+        body: {
+          objectTypeId: oneJson.objectTypeId,
+          passObjects: [
+            passObject
+          ]
+        }
+      }
+      await rp(recOpt)
     })
+  }
+  else {
+    const result = await rp(options)
+      .then(($) => {
+        return $
+      })
 
-  res.json(result)
+    res.json(result)
+  }
 })
 
 async function asyncForEach(array, callback) {
@@ -74,24 +92,6 @@ async function asyncForEach(array, callback) {
 
 router.post('/4objectCreate', function (req, res, next) {
   let attributes = []
-  if (req.body.passObjects.length > 1) {
-    asyncForEach(eq.body.passObjects, async (passObject) => {
-      let recOpt = {
-        method: 'POST',
-        uri: process.env.LOCALHOST + '/set/jira/object/4objectCreate',
-        json: true,
-        body: {
-          objectTypeId: req.body.objectTypeId,
-          passObjects: [
-            passObject
-          ]
-        }
-      }
-      await rp(recOpt)
-    })
-    res.send("running")
-    return
-  }
   Object.keys(req.body.passObjects[0]).forEach((key) => {
     attributes.push({
       "objectTypeAttributeId": key,
