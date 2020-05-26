@@ -68,7 +68,24 @@ router.post('/objectCreateSimple', async (req, res, next) => {
 
 router.post('/4objectCreate', function (req, res, next) {
   let attributes = []
-  console.log(req.body)
+  if (req.body.passObjects.length > 1) {
+    eq.body.passObjects.forEach((passObject) => {
+      let recOpt = {
+        method: 'POST',
+        uri: process.env.LOCALHOST + '/set/jira/object/4objectCreate',
+        json: true,
+        body: {
+          objectTypeId: req.body.objectTypeId,
+          passObjects: [
+            passObject
+          ]
+        }
+      }
+      rp(recOpt)
+    })
+    res.send("running")
+    return
+  }
   Object.keys(req.body.passObjects[0]).forEach((key) => {
     attributes.push({
       "objectTypeAttributeId": key,
