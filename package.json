@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "npm-run-all build server",
+    "start": "git pull && npm-run-all build server",
     "dev": "nodemon --watch src/ --exec yarn start",
-    "server": "export LD_LIBRARY_PATH=/opt/oracle/instantclient_19_6 && git pull && node ./dist-server/app",
+    "server": "export LD_LIBRARY_PATH=/opt/oracle/instantclient_19_6 && node ./dist-server/app",
     "transpile": "babel ./src --out-dir dist-server",
     "clean": "rimraf dist-server",
     "build": "npm-run-all clean transpile",
