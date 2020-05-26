@@ -66,10 +66,16 @@ router.post('/objectCreateSimple', async (req, res, next) => {
   res.json(result)
 })
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
 router.post('/4objectCreate', function (req, res, next) {
   let attributes = []
   if (req.body.passObjects.length > 1) {
-    eq.body.passObjects.forEach((passObject) => {
+    asyncForEach(eq.body.passObjects, async (passObject) => {
       let recOpt = {
         method: 'POST',
         uri: process.env.LOCALHOST + '/set/jira/object/4objectCreate',
@@ -81,7 +87,7 @@ router.post('/4objectCreate', function (req, res, next) {
           ]
         }
       }
-      rp(recOpt)
+      await rp(recOpt)
     })
     res.send("running")
     return
