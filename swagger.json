@@ -521,7 +521,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [                    
+                "parameters": [
                     {
                         "name": "user",
                         "in": "query",
@@ -1110,6 +1110,87 @@
                 }
             }
         },
+        "/get/jira/object/attributeValue": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "TOC"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Assignment User"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Assignment User"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Assignment User"
+                    },
+                    {
+                        "name": "findAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Group"
+                    },
+                    {
+                        "name": "findValue",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "TOC"
+                    },
+                    {
+                        "name": "returnAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Email"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/set/jira/issue/createIssue": {
             "post": {
                 "tags": [
@@ -1373,6 +1454,46 @@
                         "required": true,
                         "type": "string",
                         "default": "10502"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/issue/allFieldMapping": {
+            "post": {
+                "tags": [
+                    "Get Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/allFieldMappingDef"
+                        }
                     }
                 ],
                 "responses": {
@@ -1702,10 +1823,55 @@
                     "example": {
                         "objectSchemaName": "Asset Management",
                         "objectTypeName": "ABC_TEST_SYNC",
-                        "values": [{
-                            "NAME":"Test1",
-                            "DETAIL":"DET1"
-                        }]
+                        "values": [
+                            {
+                                "NAME": "Test1",
+                                "DETAIL": "DET1"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "allFieldMappingDef": {
+            "type": "object",
+            "properties": {
+                "fields": {
+                    "example": {
+                        "resolution": null,
+                        "customfield_11841": null,
+                        "customfield_11840": null,
+                        "customfield_10510": null,
+                        "customfield_10500": null,
+                        "customfield_12800": null,
+                        "customfield_11832": null,
+                        "customfield_10501": null,
+                        "customfield_11831": null,
+                        "customfield_10502": null,
+                        "customfield_11834": null,
+                        "customfield_12802": null,
+                        "customfield_10503": null,
+                        "customfield_11833": null,
+                        "customfield_10504": null,
+                        "customfield_11836": null,
+                        "customfield_12804": "[Array]",
+                        "customfield_10505": null,
+                        "customfield_11835": null,
+                        "customfield_10506": null,
+                        "customfield_11838": null,
+                        "customfield_10507": null,
+                        "customfield_11837": null,
+                        "customfield_12805": null,
+                        "customfield_10508": null,
+                        "customfield_11839": null,
+                        "lastViewed": null,
+                        "customfield_11830": null,
+                        "customfield_11700": null,
+                        "customfield_11702": null,
+                        "customfield_11701": "00:00:06",
+                        "customfield_11822": null,
+                        "customfield_11825": null,
+                        "customfield_11901": null
                     }
                 }
             }

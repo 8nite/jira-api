@@ -231,8 +231,8 @@ router.get('/objectsWithNamesAttributes', async (req, res) => {
         label: row.label
       }
       row.attributes.forEach((attr) => {
-        if (attr.objectAttributeValues[0] && attr.objectAttributeValues[0].value) {
-          item[attr.objectTypeAttribute.name] = attr.objectAttributeValues[0].value
+        if (attr.objectAttributeValues[0]) {
+          item[attr.objectTypeAttribute.name] = attr.objectAttributeValues[0].value || attr.objectAttributeValues[0].referencedObject.label
         }
       })
       return item
@@ -313,8 +313,30 @@ router.get('/objectAttributesMapping', async (req, res) => {
   res.json(oneJson)
 
 })
-/*
 
+router.get('/attributeValue', async (req, res) => {
+  let query = {
+    objectSchemaName: req.query.objectSchemaName,
+    objectTypeName: req.query.objectTypeName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectsWithNamesAttributes?' + queryString.stringify(query),
+    json: true
+  }
+
+  const values = await rp(options)
+    .then((objects) => {
+      return objects.filter((object) => {
+        return object[req.query.findAttribute] == req.query.findValue
+      }).map((item) => {
+        return item[req.query.returnAttribute]
+      })
+    })
+
+  res.json(values)
+})
+
+/*
 router.get('/objectAttributesMapping', async (req, res) => {
   let query = {
     objectSchemaName: req.query.objectSchemaName,
