@@ -4,6 +4,28 @@ require('dotenv').config()
 
 const router = express.Router();
 
+router.get('/issue', function (req, res, next) {
+  //console.log(req.body)
+  const options = {
+    method: 'GET',
+    auth: {
+      'username': process.env.JIRAUSER,
+      'password': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/api/2/issue/' + req.query.issueId,
+    json: true,
+  }
+
+  rp(options)
+    .then(function ($) {
+      res.status(200).json($)
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
 router.get('/issueFields', function (req, res, next) {
   //console.log(req.body)
   const options = {
