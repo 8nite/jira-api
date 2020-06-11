@@ -17,7 +17,7 @@ if (!process.env.LD_LIBRARY_PATH || process.env.LD_LIBRARY_PATH.length < 2) {
 const app = express();
 
 // view engine setup
-app.use(logger('dev'));
+app.use(logger(':date[iso] :method :url :status :response-time ms - :res[content-length]'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

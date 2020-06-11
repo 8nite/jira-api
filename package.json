@@ -5,7 +5,7 @@
   "scripts": {
     "start": "git pull && npm-run-all build server",
     "dev": "nodemon --watch src/ --exec yarn start",
-    "server": "export LD_LIBRARY_PATH=/opt/oracle/instantclient_19_6 && node ./dist-server/app >> server.log",
+    "server": "export LD_LIBRARY_PATH=/opt/oracle/instantclient_19_6 && node ./dist-server/app >> server.log 2>&1",
     "transpile": "babel ./src --out-dir dist-server",
     "clean": "rimraf dist-server",
     "build": "npm-run-all clean transpile",
