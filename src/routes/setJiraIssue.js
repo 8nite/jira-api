@@ -5,12 +5,12 @@ require('dotenv').config()
 const router = express.Router();
 
 router.post('/createIssue', function (req, res, next) {
-  console.log(req.body)
+  //console.log(req.body)
   const options = {
     method: 'POST',
     auth: {
-      'username': 'tnssapi',
-      'password': process.env.JIRAPASS
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
     uri: process.env.JIRAURL + '/rest/api/2/issue/',
     json: true,
@@ -18,7 +18,7 @@ router.post('/createIssue', function (req, res, next) {
       "fields": req.body.createIssue
     }
   }
-  console.log(req.body.createIssue)
+  //console.log(req.body.createIssue)
 
   rp(options)
     .then(function ($) {
@@ -69,8 +69,8 @@ router.post('/createIssueByName', (async (req, res, next) => {
   const options = {
     method: 'POST',
     auth: {
-      'username': 'tnssapi',
-      'password': process.env.JIRAPASS
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
     uri: process.env.JIRAURL + '/rest/api/2/issue/',
     json: true,
@@ -90,20 +90,21 @@ router.post('/createIssueByName', (async (req, res, next) => {
 }))
 
 router.post('/updateIssue', function (req, res, next) {
-  console.log(req.body)
+  //console.log(req.body)
   const options = {
     method: 'PUT',
     auth: {
-      'username': 'tnssapi',
-      'password': process.env.JIRAPASS
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
     uri: process.env.JIRAURL + '/rest/api/2/issue/' + req.body.updateIssue.issueId,
     json: true,
     body: {
-      "update": req.body.updateIssue.body
+      "update": req.body.updateIssue.body,
+      fields: req.body.updateIssue.fields
     }
   }
-  console.log(req.body.updateIssue)
+  //console.log(req.body.updateIssue)
 
   rp(options)
     .then(function ($) {

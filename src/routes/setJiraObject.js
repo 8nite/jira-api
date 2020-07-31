@@ -117,7 +117,7 @@ router.post('/4objectCreate', function (req, res, next) {
 
   rp(options)
     .then(function ($) {
-      console.log($)
+      //console.log($)
       res.send($)
     })
     .catch(function (err) {
@@ -167,7 +167,7 @@ const createObjectTypeAttribute = (async (objectType, name, type, defaultTypeId)
 
     rp(options)
       .then(function ($) {
-        console.log($)
+        //console.log($)
         resolve($)
       })
       .catch(function (err) {
@@ -200,7 +200,7 @@ router.get('/2createObjectTypeInnerCustomer', function (req, res, next) {
 
   rp(options)
     .then(function ($) {
-      console.log($)
+      //console.log($)
       res.send($)
     })
     .catch(function (err) {
@@ -228,7 +228,7 @@ router.get('/1createObjectType', function (req, res, next) {
 
   rp(options)
     .then(function ($) {
-      console.log($)
+      //console.log($)
       res.send($)
     })
     .catch(function (err) {
@@ -254,7 +254,7 @@ router.get('/0createObjectSchema', function (req, res, next) {
 
   rp(options)
     .then(function ($) {
-      console.log($)
+      //console.log($)
       res.send($)
     })
     .catch(function (err) {

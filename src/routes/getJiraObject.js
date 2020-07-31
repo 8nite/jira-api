@@ -336,6 +336,44 @@ router.get('/attributeValue', async (req, res) => {
   res.json(values)
 })
 
+router.get('/includeAttributObject', async (req, res) => {
+  let query = {
+    name: req.query.objectSchemaName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectSchemaNametoID?' + queryString.stringify(query),
+    json: true
+  }
+
+  const objectSchemaId = await rp(options)
+    .then((ret) => {
+      return ret.id
+    })
+
+  query = {
+    objectSchemaId: objectSchemaId,
+    objectType: req.query.objectTypeName
+  }
+  options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectNametoID?' + queryString.stringify(query),
+    json: true
+  }
+
+  const objects = await rp(options)
+    .then((ret) => {
+      return ret
+    })
+
+  if (objects) {
+    res.json(objects.filter((entry) => {
+      if (entry[req.query.attribute])
+        return req.query.value.toUpperCase().includes(entry[req.query.attribute].toUpperCase())
+    }))
+  } else {
+    res.json({})
+  }
+})
+
 /*
 router.get('/objectAttributesMapping', async (req, res) => {
   let query = {

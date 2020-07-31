@@ -2,6 +2,7 @@ import express from 'express'
 import 'babel-polyfill'
 import rp from 'request-promise'
 import queryString from 'query-string'
+import flatten from 'safe-flat'
 require('dotenv').config()
 
 const router = express.Router();
@@ -171,7 +172,7 @@ router.get('/getOBjectinType', function (req, res, next) {
 
   rp(options)
     .then(function ($) {
-      console.log($)
+      //console.log($)
       res.send($)
     })
     .catch(function (err) {
@@ -267,8 +268,8 @@ router.get('/discrepancy', async (req, res, next) => {
   discrepancy.remove = CMDB.filter((item) => {
     return (!sqlData.map((sqlEach) => { return sqlEach[sqlColName] }).includes(item[sqlColName]))
   })
-  
-  const update = sqlData.filter((item) =>  { 
+
+  const update = sqlData.filter((item) => {
     return (CMDB.map((sub) => { return sub[sqlColName] }).includes(item[sqlColName]))
   }).filter((item) => {
     return CMDB.every((CMDBrow) => {
@@ -282,7 +283,7 @@ router.get('/discrepancy', async (req, res, next) => {
       }
     })
   })
-  
+
   discrepancy.remove = discrepancy.remove.concat(update.map((row) => {
     return CMDB.filter((CMDBrow) => {
       return CMDBrow[sqlColName] == row[sqlColName]
@@ -296,5 +297,40 @@ router.get('/discrepancy', async (req, res, next) => {
     ...discrepancy
   })
 })
+
+router.get('/ExportCSVreport', function (req, res, next) {
+  const options = {
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/api/2/search?jql=project=' + req.query.projectKey,
+    json: true
+  }
+
+  rp(options)
+    .then(($) => {
+      let issues = $.issues.map((issue) => {
+        let issueOptions = {
+          uri: process.env.LOCALHOST + '/get/jira/issue/issueNames?issueId=' + issue.key,
+          json: true,
+        }
+        return rp(issueOptions).then((ret) => {
+          return {
+            key: ret.key,
+            fields: flatten(ret.fields)
+          }
+        })
+      })
+      Promise.all(issues).then((issuesRet) => {
+        console.log(issuesRet)
+        res.send(issuesRet)
+      })
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
 
 module.exports = router;

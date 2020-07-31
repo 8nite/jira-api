@@ -18,9 +18,10 @@ const app = express();
 
 // view engine setup
 app.use(logger(':date[iso] :method :url :status :response-time ms - :res[content-length]'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '2000mb', extended: true }));
+app.use(express.urlencoded({ limit: '2000mb', extended: true }));
 app.use(cookieParser());
+app.use('/api/public', express.static('public'))
 
 app.use('/', indexRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

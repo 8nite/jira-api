@@ -29,6 +29,9 @@
         },
         {
             "name": "Get Jira Issue"
+        },
+        {
+            "name": "IBVSD"
         }
     ],
     "schemes": [
@@ -1140,20 +1143,6 @@
                         "default": "Assignment User"
                     },
                     {
-                        "name": "objectTypeName",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "default": "Assignment User"
-                    },
-                    {
-                        "name": "objectTypeName",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "default": "Assignment User"
-                    },
-                    {
                         "name": "findAttribute",
                         "in": "query",
                         "required": true,
@@ -1173,6 +1162,66 @@
                         "required": true,
                         "type": "string",
                         "default": "Email"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/object/includeAttributObject": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "IBVSD"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Customer"
+                    },
+                    {
+                        "name": "attribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Sender"
+                    },
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "herbert.tung"
                     }
                 ],
                 "responses": {
@@ -1299,13 +1348,13 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "type": "string"
+                            "type": "json"
                         }
                     },
                     "500": {
                         "description": "Failed",
                         "schema": {
-                            "type": "string"
+                            "type": "json"
                         }
                     }
                 }
@@ -1465,6 +1514,45 @@
                 }
             }
         },
+        "/get/jira/issue/issueNames": {
+            "get": {
+                "tags": [
+                    "Get Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "issueId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "IBVSD-23"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/get/jira/issue/issueFields": {
             "get": {
                 "tags": [
@@ -1546,6 +1634,125 @@
                         "description": "Failed",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/IBVSD/gotEmail": {
+            "post": {
+                "tags": [
+                    "IBVSD"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IBVSDGotEmailDef"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "/IBVSD/updateEmailToIssue": {
+            "post": {
+                "tags": [
+                    "IBVSD"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IBVSDUpdateIssueDef"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/ExportCSVreport": {
+            "get": {
+                "tags": [
+                    "Get Jira"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectKey",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "IBVSD"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "json"
                         }
                     }
                 }
@@ -1770,25 +1977,10 @@
             "type": "object",
             "properties": {
                 "updateIssue": {
-                    "type": "object",
-                    "properties": {
-                        "project": {
-                            "type": "object",
-                            "properties": {
-                                "issueId": {
-                                    "type": "string",
-                                    "enum": "AM-9"
-                                }
-                            }
-                        },
-                        "body": {
-                            "type": "object",
-                            "properties": {
-                                "summary": {
-                                    "type": "string",
-                                    "enum": "Task"
-                                }
-                            }
+                    "example": {
+                        "issueId": "IBVSD-9",
+                        "fields": {
+                            "customfield_12020": "TEST"
                         }
                     }
                 }
@@ -1911,6 +2103,36 @@
                         "customfield_11822": null,
                         "customfield_11825": null,
                         "customfield_11901": null
+                    }
+                }
+            }
+        },
+        "IBVSDGotEmailDef": {
+            "type": "object",
+            "properties": {
+                "info": {
+                    "example": {
+                        "issueKey": "IBVSD-9",
+                        "to": "herbert.tung@hgc.com.hk",
+                        "cc": "testing@hgc.com.hk",
+                        "subject": "testing open issue",
+                        "body": "Email body"
+                    }
+                }
+            }
+        },
+        "IBVSDUpdateIssueDef": {
+            "type": "object",
+            "properties": {
+                "issueKey": {
+                    "example": "IBVSD-9"
+                },
+                "email": {
+                    "example": {
+                        "CustomerTo": "herbert.tung@hgc.com.hk",
+                        "CustomerCc": "herbert.tung@hgc.com.hk",
+                        "CustomerSubject": "[IBVSD-1] Testing",
+                        "CustomerBody": "Email body"
                     }
                 }
             }
