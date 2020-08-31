@@ -3,6 +3,7 @@ import 'babel-polyfill'
 import rp from 'request-promise'
 import queryString from 'query-string'
 import flatten from 'safe-flat'
+import { Parser } from 'json2csv'
 require('dotenv').config()
 
 const router = express.Router();
@@ -304,12 +305,13 @@ router.get('/ExportCSVreport', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAURL + '/rest/api/2/search?jql=project=' + req.query.projectKey,
+    uri: process.env.JIRAURL + '/rest/api/2/search?jql=project=' + req.query.projectKey + '&maxResults=1000&',
     json: true
   }
 
   rp(options)
     .then(($) => {
+      //res.send($.issues.map((issue) => { return issue.key }))
       let issues = $.issues.map((issue) => {
         let issueOptions = {
           uri: process.env.LOCALHOST + '/get/jira/issue/issueNames?issueId=' + issue.key,
@@ -318,13 +320,16 @@ router.get('/ExportCSVreport', function (req, res, next) {
         return rp(issueOptions).then((ret) => {
           return {
             key: ret.key,
-            fields: flatten(ret.fields)
+            ...flatten(ret.fields)
           }
         })
       })
       Promise.all(issues).then((issuesRet) => {
         console.log(issuesRet)
-        res.send(issuesRet)
+        //res.send(issuesRet)
+        //transform into csv
+        const parser = new Parser(Object.keys(issuesRet));
+        res.send(parser.parse(issuesRet))
       })
     })
     .catch(function (err) {

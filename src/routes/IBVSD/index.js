@@ -3,6 +3,8 @@ import rp from 'request-promise'
 import queryString from 'query-string'
 import momenttz from 'moment-timezone'
 import { Base64 } from 'js-base64'
+import fs from 'fs'
+import path from 'path'
 
 require('dotenv').config()
 
@@ -25,7 +27,7 @@ router.post('/gotEmail', async (req, res, next) => {
     emailFields.body = Base64.decode(emailFields.body)
     if (emailFields.body) {
         //emailFields.body = Buffer.from(emailFields.body.replace(/[^\x20-\x7E][!@#$%^&*()]/g, '')).toString('base64')
-        emailFields.body = '<meta charset="utf-8" />' + emailFields.body 
+        emailFields.body = '<meta charset="utf-8" />' + emailFields.body
         emailFields.body = Base64.encode(emailFields.body)
     }
 
@@ -174,6 +176,70 @@ const updateIssue = ((issueId, fields) => {
         }
     }
     rp(issueOptions)
+
+    //set attachment
+
+    let attachmentList = []
+    try {
+        attachmentList.push(JSON.parse(fields.CustomerAttachment))
+    } catch { }
+    try {
+        attachmentList.push(JSON.parse(fields.CompanyAttachment))
+    } catch { }
+    try {
+        attachmentList.push(JSON.parse(fields.InternalAttachment))
+    } catch { }
+    console.log('fields: ' + Object.keys(fields))
+    console.log('attachment list: ' + attachmentList)
+    attachmentList.forEach((attachments) => {
+        if (Array.isArray(attachments)) {
+            attachments.forEach((attachment) => {
+                console.log('adding attachment0: ' + attachment.filename)
+                //console.log('adding attachment0: ' + attachment.content)
+
+                let imageBuffer
+                if (!attachment.filename) {
+                    attachment.filename = 'email.eml'
+                    imageBuffer = Base64.decode(attachment.content).toString()
+                    console.log('adding attachment2: ' + imageBuffer.substring(0,20))
+                } else {
+                    imageBuffer = Buffer.from(attachment.content.toString(), 'base64')
+                }
+                fs.writeFile(path.resolve(__dirname) + "/../../public/temp/" + attachment.filename, imageBuffer, async (err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else if (!err) {
+                        console.log('adding attachment1: ' + attachment.filename)
+                        const options = {
+                            method: 'POST',
+                            auth: {
+                                'user': process.env.JIRAUSER,
+                                'pass': process.env.JIRAPASS
+                            },
+                            uri: process.env.JIRAURL + '/rest/api/2/issue/' + issueId + '/attachments',
+                            json: true,
+                            formData: {
+                                file: {
+                                    value: fs.createReadStream(path.resolve(__dirname) + '/../../public/temp/' + attachment.filename),
+                                    options: {
+                                        filename: attachment.filename,
+                                    }
+                                }
+                            },
+                            headers: {
+                                'X-Atlassian-Token': 'no-check'
+                            }
+                        }
+
+                        await rp(options)
+
+                        fs.unlink(path.resolve(__dirname) + "/../../public/temp/" + attachment.filename, () => { })
+                    }
+                })
+            })
+        }
+    })
 })
 
 router.post('/updateEmailToIssue', async (req, res, next) => {
