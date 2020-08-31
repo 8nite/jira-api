@@ -2069,40 +2069,758 @@
             "properties": {
                 "fields": {
                     "example": {
+                        "statuscategorychangedate": "2020-08-31T10:11:58.413+0800",
+                        "customfield_10076": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/customFieldOption/10157",
+                          "value": "4 - Standard",
+                          "id": "10157"
+                        },
+                        "customfield_10077": null,
+                        "fixVersions": [],
+                        "customfield_10110": [
+                          {
+                            "appKey": "com.riadalabs.jira.plugins.insight",
+                            "originId": "4238_151",
+                            "serializedOrigin": "com.riadalabs.jira.plugins.insight/4238_151",
+                            "value": "com.riadalabs.jira.plugins.insight/4238_151"
+                          }
+                        ],
+                        "customfield_10111": null,
+                        "customfield_10078": null,
                         "resolution": null,
-                        "customfield_11841": null,
-                        "customfield_11840": null,
-                        "customfield_10510": null,
-                        "customfield_10500": null,
-                        "customfield_12800": null,
-                        "customfield_11832": null,
-                        "customfield_10501": null,
-                        "customfield_11831": null,
-                        "customfield_10502": null,
-                        "customfield_11834": null,
-                        "customfield_12802": null,
-                        "customfield_10503": null,
-                        "customfield_11833": null,
-                        "customfield_10504": null,
-                        "customfield_11836": null,
-                        "customfield_12804": "[Array]",
-                        "customfield_10505": null,
-                        "customfield_11835": null,
-                        "customfield_10506": null,
-                        "customfield_11838": null,
-                        "customfield_10507": null,
-                        "customfield_11837": null,
-                        "customfield_12805": null,
-                        "customfield_10508": null,
-                        "customfield_11839": null,
+                        "customfield_10079": null,
+                        "customfield_10112": null,
+                        "customfield_10113": "4 - Standard",
+                        "customfield_10114": {
+                          "id": "7",
+                          "name": "Resolve Time SLA breached",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/7"
+                          },
+                          "completedCycles": [],
+                          "ongoingCycle": {
+                            "startTime": {
+                              "iso8601": "2020-08-31T10:11:57+0800",
+                              "jira": "2020-08-31T10:11:57.763+0800",
+                              "friendly": "Today 10:11 AM",
+                              "epochMillis": 1598839917763
+                            },
+                            "breachTime": {
+                              "iso8601": "2020-09-05T10:11:57+0800",
+                              "jira": "2020-09-05T10:11:57.763+0800",
+                              "friendly": "05/Sep/20 10:11 AM",
+                              "epochMillis": 1599271917763
+                            },
+                            "breached": false,
+                            "paused": false,
+                            "withinCalendarHours": true,
+                            "goalDuration": {
+                              "millis": 432000000,
+                              "friendly": "120h"
+                            },
+                            "elapsedTime": {
+                              "millis": 17688737,
+                              "friendly": "4h 54m"
+                            },
+                            "remainingTime": {
+                              "millis": 414311263,
+                              "friendly": "115h 5m"
+                            }
+                          }
+                        },
+                        "customfield_10104": [],
+                        "customfield_10105": [],
+                        "customfield_10106": [],
+                        "customfield_10108": [],
+                        "customfield_10109": [],
                         "lastViewed": null,
-                        "customfield_11830": null,
-                        "customfield_11700": null,
-                        "customfield_11702": null,
-                        "customfield_11701": "00:00:06",
-                        "customfield_11822": null,
-                        "customfield_11825": null,
-                        "customfield_11901": null
+                        "customfield_10065": null,
+                        "priority": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/priority/3",
+                          "iconUrl": "https://hgcitd.atlassian.net/images/icons/priorities/medium.svg",
+                          "name": "Medium",
+                          "id": "3"
+                        },
+                        "customfield_10100": [
+                          {
+                            "appKey": "com.riadalabs.jira.plugins.insight",
+                            "originId": "4244_230",
+                            "serializedOrigin": "com.riadalabs.jira.plugins.insight/4244_230",
+                            "value": "com.riadalabs.jira.plugins.insight/4244_230"
+                          }
+                        ],
+                        "customfield_10101": [
+                          {
+                            "appKey": "com.riadalabs.jira.plugins.insight",
+                            "originId": "4246_241",
+                            "serializedOrigin": "com.riadalabs.jira.plugins.insight/4246_241",
+                            "value": "com.riadalabs.jira.plugins.insight/4246_241"
+                          }
+                        ],
+                        "customfield_10068": null,
+                        "customfield_10102": [
+                          {
+                            "appKey": "com.riadalabs.jira.plugins.insight",
+                            "originId": "4245_249",
+                            "serializedOrigin": "com.riadalabs.jira.plugins.insight/4245_249",
+                            "value": "com.riadalabs.jira.plugins.insight/4245_249"
+                          }
+                        ],
+                        "customfield_10069": null,
+                        "customfield_10103": "2020-08-04T19:13:00.000+0800",
+                        "labels": [],
+                        "timeestimate": null,
+                        "aggregatetimeoriginalestimate": null,
+                        "versions": [],
+                        "issuelinks": [],
+                        "assignee": null,
+                        "status": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/status/1",
+                          "description": "The issue is open and ready for the assignee to start work on it.",
+                          "iconUrl": "https://hgcitd.atlassian.net/images/icons/statuses/open.png",
+                          "name": "Open",
+                          "id": "1",
+                          "statusCategory": {
+                            "self": "https://hgcitd.atlassian.net/rest/api/2/statuscategory/2",
+                            "id": 2,
+                            "key": "new",
+                            "colorName": "blue-gray",
+                            "name": "To Do"
+                          }
+                        },
+                        "components": [],
+                        "aggregatetimeestimate": null,
+                        "creator": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                          "accountId": "5d3e569af14e7c0da5628546",
+                          "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                          },
+                          "displayName": "Ryan.Leung",
+                          "active": true,
+                          "timeZone": "Asia/Shanghai",
+                          "accountType": "atlassian"
+                        },
+                        "subtasks": [],
+                        "customfield_10041": null,
+                        "customfield_10042": null,
+                        "reporter": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                          "accountId": "5d3e569af14e7c0da5628546",
+                          "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                          },
+                          "displayName": "Ryan.Leung",
+                          "active": true,
+                          "timeZone": "Asia/Shanghai",
+                          "accountType": "atlassian"
+                        },
+                        "customfield_10043": null,
+                        "customfield_10044": null,
+                        "aggregateprogress": {
+                          "progress": 0,
+                          "total": 0
+                        },
+                        "customfield_10045": {
+                          "id": "3",
+                          "name": "Time to resolution",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/3"
+                          },
+                          "completedCycles": [],
+                          "ongoingCycle": {
+                            "startTime": {
+                              "iso8601": "2020-08-31T10:11:57+0800",
+                              "jira": "2020-08-31T10:11:57.763+0800",
+                              "friendly": "Today 10:11 AM",
+                              "epochMillis": 1598839917763
+                            },
+                            "breachTime": {
+                              "iso8601": "2020-08-31T14:11:57+0800",
+                              "jira": "2020-08-31T14:11:57.763+0800",
+                              "friendly": "Today 2:11 PM",
+                              "epochMillis": 1598854317763
+                            },
+                            "breached": true,
+                            "paused": false,
+                            "withinCalendarHours": true,
+                            "goalDuration": {
+                              "millis": 14400000,
+                              "friendly": "4h"
+                            },
+                            "elapsedTime": {
+                              "millis": 17688695,
+                              "friendly": "4h 54m"
+                            },
+                            "remainingTime": {
+                              "millis": -3288695,
+                              "friendly": "-54m"
+                            }
+                          }
+                        },
+                        "customfield_10046": {
+                          "id": "4",
+                          "name": "Time to first response",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/4"
+                          },
+                          "completedCycles": [],
+                          "ongoingCycle": {
+                            "startTime": {
+                              "iso8601": "2020-08-31T10:11:57+0800",
+                              "jira": "2020-08-31T10:11:57.763+0800",
+                              "friendly": "Today 10:11 AM",
+                              "epochMillis": 1598839917763
+                            },
+                            "breachTime": {
+                              "iso8601": "2020-08-31T12:11:57+0800",
+                              "jira": "2020-08-31T12:11:57.763+0800",
+                              "friendly": "Today 12:11 PM",
+                              "epochMillis": 1598847117763
+                            },
+                            "breached": true,
+                            "paused": false,
+                            "withinCalendarHours": true,
+                            "goalDuration": {
+                              "millis": 7200000,
+                              "friendly": "2h"
+                            },
+                            "elapsedTime": {
+                              "millis": 17688860,
+                              "friendly": "4h 54m"
+                            },
+                            "remainingTime": {
+                              "millis": -10488860,
+                              "friendly": "-2h 54m"
+                            }
+                          }
+                        },
+                        "customfield_10047": {
+                          "languageCode": "en",
+                          "displayName": "English"
+                        },
+                        "progress": {
+                          "progress": 0,
+                          "total": 0
+                        },
+                        "votes": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/issue/TOCP-85/votes",
+                          "votes": 0,
+                          "hasVoted": false
+                        },
+                        "worklog": {
+                          "startAt": 0,
+                          "maxResults": 20,
+                          "total": 0,
+                          "worklogs": []
+                        },
+                        "issuetype": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/issuetype/10300",
+                          "id": "10300",
+                          "description": "For system outages or incidents. Created by Jira Service Desk.",
+                          "iconUrl": "https://hgcitd.atlassian.net/secure/viewavatar?size=medium&avatarId=10558&avatarType=issuetype",
+                          "name": "Incident",
+                          "subtask": false,
+                          "avatarId": 10558
+                        },
+                        "timespent": null,
+                        "project": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/project/10114",
+                          "id": "10114",
+                          "key": "TOCP",
+                          "name": "TOCP",
+                          "projectTypeKey": "service_desk",
+                          "simplified": false,
+                          "avatarUrls": {
+                            "48x48": "https://hgcitd.atlassian.net/secure/projectavatar?pid=10114&avatarId=10421",
+                            "24x24": "https://hgcitd.atlassian.net/secure/projectavatar?size=small&s=small&pid=10114&avatarId=10421",
+                            "16x16": "https://hgcitd.atlassian.net/secure/projectavatar?size=xsmall&s=xsmall&pid=10114&avatarId=10421",
+                            "32x32": "https://hgcitd.atlassian.net/secure/projectavatar?size=medium&s=medium&pid=10114&avatarId=10421"
+                          }
+                        },
+                        "aggregatetimespent": null,
+                        "customfield_10036": null,
+                        "resolutiondate": null,
+                        "workratio": -1,
+                        "issuerestriction": {
+                          "issuerestrictions": {},
+                          "shouldDisplay": false
+                        },
+                        "watches": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/issue/TOCP-85/watchers",
+                          "watchCount": 1,
+                          "isWatching": false
+                        },
+                        "created": "2020-08-31T10:11:57.763+0800",
+                        "customfield_10020": null,
+                        "customfield_10021": [],
+                        "customfield_10022": null,
+                        "customfield_10023": null,
+                        "customfield_10017": null,
+                        "customfield_10018": null,
+                        "customfield_10019": null,
+                        "updated": "2020-08-31T10:13:55.964+0800",
+                        "customfield_10090": null,
+                        "customfield_10091": null,
+                        "customfield_10092": null,
+                        "customfield_10093": {
+                          "id": "5",
+                          "name": "Time to close after resolution",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/5"
+                          },
+                          "completedCycles": []
+                        },
+                        "customfield_10094": {
+                          "id": "6",
+                          "name": "Time to approve normal change",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/6"
+                          },
+                          "completedCycles": []
+                        },
+                        "timeoriginalestimate": null,
+                        "customfield_10095": [],
+                        "customfield_10096": [
+                          {
+                            "appKey": "com.riadalabs.jira.plugins.insight",
+                            "originId": "4247_191",
+                            "serializedOrigin": "com.riadalabs.jira.plugins.insight/4247_191",
+                            "value": "com.riadalabs.jira.plugins.insight/4247_191"
+                          }
+                        ],
+                        "customfield_10097": [
+                          {
+                            "appKey": "com.riadalabs.jira.plugins.insight",
+                            "originId": "4240_188",
+                            "serializedOrigin": "com.riadalabs.jira.plugins.insight/4240_188",
+                            "value": "com.riadalabs.jira.plugins.insight/4240_188"
+                          }
+                        ],
+                        "description": "redirected to an unresolved URL (staging.mtmlabo.com)",
+                        "customfield_10010": "0|i01xjj:",
+                        "customfield_10098": null,
+                        "customfield_10011": null,
+                        "customfield_10099": [
+                          {
+                            "appKey": "com.riadalabs.jira.plugins.insight",
+                            "originId": "4239_38",
+                            "serializedOrigin": "com.riadalabs.jira.plugins.insight/4239_38",
+                            "value": "com.riadalabs.jira.plugins.insight/4239_38"
+                          }
+                        ],
+                        "customfield_10012": null,
+                        "timetracking": {},
+                        "customfield_10006": null,
+                        "security": null,
+                        "customfield_10007": null,
+                        "customfield_10008": {
+                          "hasEpicLinkFieldDependency": false,
+                          "showField": false,
+                          "nonEditableReason": {
+                            "reason": "PLUGIN_LICENSE_ERROR",
+                            "message": "The Parent Link is only available to Jira Premium users."
+                          }
+                        },
+                        "attachment": [
+                          {
+                            "self": "https://hgcitd.atlassian.net/rest/api/2/attachment/16811",
+                            "id": "16811",
+                            "filename": "4f6a64af-becf-49ad-8130-0ef707dcc93b.jfif",
+                            "author": {
+                              "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                              "accountId": "5d3e569af14e7c0da5628546",
+                              "avatarUrls": {
+                                "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                              },
+                              "displayName": "Ryan.Leung",
+                              "active": true,
+                              "timeZone": "Asia/Shanghai",
+                              "accountType": "atlassian"
+                            },
+                            "created": "2020-08-31T10:12:40.219+0800",
+                            "size": 68213,
+                            "mimeType": "image/jpeg",
+                            "content": "https://hgcitd.atlassian.net/secure/attachment/16811/4f6a64af-becf-49ad-8130-0ef707dcc93b.jfif"
+                          }
+                        ],
+                        "customfield_10009": null,
+                        "summary": "24x7 - enterprizCloud customer MTM (EZS000012)",
+                        "customfield_10080": null,
+                        "customfield_10081": null,
+                        "customfield_10082": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/customFieldOption/10071",
+                          "value": "4 - Standard",
+                          "id": "10071"
+                        },
+                        "customfield_10083": null,
+                        "customfield_10084": null,
+                        "customfield_10085": null,
+                        "customfield_10086": null,
+                        "customfield_10087": null,
+                        "customfield_10000": "{}",
+                        "customfield_10088": {
+                          "self": "https://hgcitd.atlassian.net/rest/api/2/customFieldOption/10144",
+                          "value": "Email",
+                          "id": "10144"
+                        },
+                        "customfield_10089": null,
+                        "customfield_10001": null,
+                        "customfield_10002": [],
+                        "customfield_10115": {
+                          "id": "8",
+                          "name": "Resolve time SLA reminder",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/8"
+                          },
+                          "completedCycles": [],
+                          "ongoingCycle": {
+                            "startTime": {
+                              "iso8601": "2020-08-31T10:11:57+0800",
+                              "jira": "2020-08-31T10:11:57.763+0800",
+                              "friendly": "Today 10:11 AM",
+                              "epochMillis": 1598839917763
+                            },
+                            "breachTime": {
+                              "iso8601": "2020-09-04T10:11:57+0800",
+                              "jira": "2020-09-04T10:11:57.763+0800",
+                              "friendly": "04/Sep/20 10:11 AM",
+                              "epochMillis": 1599185517763
+                            },
+                            "breached": false,
+                            "paused": false,
+                            "withinCalendarHours": true,
+                            "goalDuration": {
+                              "millis": 345600000,
+                              "friendly": "96h"
+                            },
+                            "elapsedTime": {
+                              "millis": 17688829,
+                              "friendly": "4h 54m"
+                            },
+                            "remainingTime": {
+                              "millis": 327911171,
+                              "friendly": "91h 5m"
+                            }
+                          }
+                        },
+                        "customfield_10116": {
+                          "id": "9",
+                          "name": "Resolved issue auto Close",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/9"
+                          },
+                          "completedCycles": []
+                        },
+                        "customfield_10117": null,
+                        "environment": null,
+                        "customfield_10118": {
+                          "id": "10",
+                          "name": "Response time SLA breached",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/10"
+                          },
+                          "completedCycles": [],
+                          "ongoingCycle": {
+                            "startTime": {
+                              "iso8601": "2020-08-31T10:11:57+0800",
+                              "jira": "2020-08-31T10:11:57.763+0800",
+                              "friendly": "Today 10:11 AM",
+                              "epochMillis": 1598839917763
+                            },
+                            "breachTime": {
+                              "iso8601": "2020-08-31T11:11:57+0800",
+                              "jira": "2020-08-31T11:11:57.763+0800",
+                              "friendly": "Today 11:11 AM",
+                              "epochMillis": 1598843517763
+                            },
+                            "breached": true,
+                            "paused": false,
+                            "withinCalendarHours": true,
+                            "goalDuration": {
+                              "millis": 3600000,
+                              "friendly": "1h"
+                            },
+                            "elapsedTime": {
+                              "millis": 17688855,
+                              "friendly": "4h 54m"
+                            },
+                            "remainingTime": {
+                              "millis": -14088855,
+                              "friendly": "-3h 54m"
+                            }
+                          }
+                        },
+                        "customfield_10119": {
+                          "id": "11",
+                          "name": "Response time SLA reminder",
+                          "_links": {
+                            "self": "https://hgcitd.atlassian.net/rest/servicedeskapi/request/22635/sla/11"
+                          },
+                          "completedCycles": [],
+                          "ongoingCycle": {
+                            "startTime": {
+                              "iso8601": "2020-08-31T10:11:57+0800",
+                              "jira": "2020-08-31T10:11:57.763+0800",
+                              "friendly": "Today 10:11 AM",
+                              "epochMillis": 1598839917763
+                            },
+                            "breachTime": {
+                              "iso8601": "2020-08-31T10:41:57+0800",
+                              "jira": "2020-08-31T10:41:57.763+0800",
+                              "friendly": "Today 10:41 AM",
+                              "epochMillis": 1598841717763
+                            },
+                            "breached": true,
+                            "paused": false,
+                            "withinCalendarHours": true,
+                            "goalDuration": {
+                              "millis": 1800000,
+                              "friendly": "30m"
+                            },
+                            "elapsedTime": {
+                              "millis": 17688745,
+                              "friendly": "4h 54m"
+                            },
+                            "remainingTime": {
+                              "millis": -15888745,
+                              "friendly": "-4h 24m"
+                            }
+                          }
+                        },
+                        "duedate": null,
+                        "comment": {
+                          "comments": [
+                            {
+                              "self": "https://hgcitd.atlassian.net/rest/api/2/issue/22635/comment/23309",
+                              "id": "23309",
+                              "author": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "body": "!4f6a64af-becf-49ad-8130-0ef707dcc93b.jfif|width=200,height=200!",
+                              "updateAuthor": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "created": "2020-08-31T10:12:40.475+0800",
+                              "updated": "2020-08-31T10:12:40.475+0800",
+                              "jsdPublic": false
+                            },
+                            {
+                              "self": "https://hgcitd.atlassian.net/rest/api/2/issue/22635/comment/23310",
+                              "id": "23310",
+                              "author": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "body": "Henry.Li@hgc.com.hkHenry Li (HGC - Support Officer, NSDO) added a comment - 2020-08-04 19:16:30\n\n4f6a64af-becf-49ad-8130-0ef707dcc93b.jfif",
+                              "updateAuthor": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "created": "2020-08-31T10:12:57.812+0800",
+                              "updated": "2020-08-31T10:12:57.812+0800",
+                              "jsdPublic": false
+                            },
+                            {
+                              "self": "https://hgcitd.atlassian.net/rest/api/2/issue/22635/comment/23311",
+                              "id": "23311",
+                              "author": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "body": "Henry.Li@hgc.com.hkHenry Li (HGC - Support Officer, NSDO) added a comment - 2020-08-04 19:16:42\n\nDowntimeFrom :Aug 4, 2020 4:38:17 PM\n\nTo : Aug 4, 2020 7:06:47 PM",
+                              "updateAuthor": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "created": "2020-08-31T10:13:09.984+0800",
+                              "updated": "2020-08-31T10:13:09.984+0800",
+                              "jsdPublic": false
+                            },
+                            {
+                              "self": "https://hgcitd.atlassian.net/rest/api/2/issue/22635/comment/23312",
+                              "id": "23312",
+                              "author": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "body": "LARRY.LAI@hgc.com.hkLarry Lai (HGC - Manager - Infrastructure & Network, NSDO) added a comment - 2020-08-05 09:09:30\n\nTo resolved the webpage by modifying the host take as\n\n203.184.205.96 staging.mtmlabo.com\n\nwe get the web page screen but with certificate error.\n\nSuggestion to customer :-\n\n# correct the DNS record\n\n# using a valid certificate",
+                              "updateAuthor": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "created": "2020-08-31T10:13:26.933+0800",
+                              "updated": "2020-08-31T10:13:26.933+0800",
+                              "jsdPublic": false
+                            },
+                            {
+                              "self": "https://hgcitd.atlassian.net/rest/api/2/issue/22635/comment/23313",
+                              "id": "23313",
+                              "author": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "body": "Dreail.Yim@hgc.com.hkDreail Yim (HGC - Support Officer, NSDO) added a comment - 2020-08-06 08:43:27\n\nCan't see the screenshot, please upload again thanks.",
+                              "updateAuthor": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "created": "2020-08-31T10:13:39.709+0800",
+                              "updated": "2020-08-31T10:13:39.709+0800",
+                              "jsdPublic": false
+                            },
+                            {
+                              "self": "https://hgcitd.atlassian.net/rest/api/2/issue/22635/comment/23314",
+                              "id": "23314",
+                              "author": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "body": "August 13\n\nJIRA ADMIN\n\nJIRA ADMIN closed TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nIncident13/Aug/20 12:15 PM\n\nAugust 10\n\nDreail Yim (HGC - Support Officer, NSDO)\n\nDreail Yim (HGC - Support Officer, NSDO) resolved TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nIncident10/Aug/20 12:15 PM\n\nAugust 06\n\nDreail Yim (HGC - Support Officer, NSDO)\n\nDreail Yim (HGC - Support Officer, NSDO) commented on TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nCan't see the screenshot, please upload again thanks.\n\nIncident06/Aug/20 8:43 AM\n\nAugust 05\n\nLarry Lai (HGC - Manager - Infrastructure & Network, NSDO)\n\nLarry Lai (HGC - Manager - Infrastructure & Network, NSDO) commented on TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nTo resolved the webpage by modifying the host take as\n\n203.184.205.96 staging.mtmlabo.com\n\nwe get the web page screen but with certificate error.\n\nSuggestion to customer :-\n\n# correct the DNS record\n\n# using a valid certificate\n\n \n\nIncident05/Aug/20 9:09 AM\n\nAugust 04\n\nHenry Li (HGC - Support Officer, NSDO)\n\nHenry Li (HGC - Support Officer, NSDO) commented on TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nDowntimeFrom :Aug 4, 2020 4:38:17 PM\n\nTo : Aug 4, 2020 7:06:47 PM\n\nIncident04/Aug/20 7:16 PM\n\nHenry Li (HGC - Support Officer, NSDO) commented on TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\n4f6a64af-becf-49ad-8130-0ef707dcc93b.jfif\n\nIncident04/Aug/20 7:16 PM\n\nHenry Li (HGC - Support Officer, NSDO) attached one file to TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\n4f6a64af-becf-49ad-8130-0ef707dcc93b.jfif\n\nIncident04/Aug/20 7:16 PM\n\nHenry Li (HGC - Support Officer, NSDO) changed the status to Pending on TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nIncident04/Aug/20 7:15 PM\n\nJIRA ADMIN\n\nJIRA ADMIN updated the Severity of TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nIncident04/Aug/20 7:15 PM\n\nHenry Li (HGC - Support Officer, NSDO)\n\nHenry Li (HGC - Support Officer, NSDO) created TOCP-88 - 24x7 - enterprizCloud customer MTM (EZS000012)\n\nredirected to an unresolved URL (staging.mtmlabo.com)\n\nIncident04/Aug/20 7:15 PM",
+                              "updateAuthor": {
+                                "self": "https://hgcitd.atlassian.net/rest/api/2/user?accountId=5d3e569af14e7c0da5628546",
+                                "accountId": "5d3e569af14e7c0da5628546",
+                                "avatarUrls": {
+                                  "48x48": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "24x24": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "16x16": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png",
+                                  "32x32": "https://secure.gravatar.com/avatar/8d440456e453ebc89241663159f3c35f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-0.png"
+                                },
+                                "displayName": "Ryan.Leung",
+                                "active": true,
+                                "timeZone": "Asia/Shanghai",
+                                "accountType": "atlassian"
+                              },
+                              "created": "2020-08-31T10:13:55.964+0800",
+                              "updated": "2020-08-31T10:13:55.964+0800",
+                              "jsdPublic": false
+                            }
+                          ],
+                          "maxResults": 6,
+                          "total": 6,
+                          "startAt": 0
+                        }
                     }
                 }
             }
