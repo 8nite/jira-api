@@ -123,6 +123,16 @@ function whizzywig(controls){
   if(!ta[i].id){ta[i].id=ta.name}
   makeWhizzyWig(ta[i].id,controls);
  }
+ ta=document.getElementById("sendToCarrierForm").getElementsByTagName('TEXTAREA');
+ for (i=0;i<ta.length;i++){
+  if(!ta[i].id){ta[i].id=ta.name}
+  makeWhizzyWig(ta[i].id,controls);
+ }
+ ta=document.getElementById("sendToInternalForm").getElementsByTagName('TEXTAREA');
+ for (i=0;i<ta.length;i++){
+  if(!ta[i].id){ta[i].id=ta.name}
+  makeWhizzyWig(ta[i].id,controls);
+ }
 }
 function addEvt(o,e,f){if(wn.addEventListener){o.addEventListener(e, f, false)}else{o.attachEvent("on"+e,f)}}
 function doDbl(){if(papa.nodeName == 'IMG'){doImage()}else{if(papa.nodeName=='A'){doLink()}}}
