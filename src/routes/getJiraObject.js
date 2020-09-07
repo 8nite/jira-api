@@ -149,6 +149,11 @@ router.get('/object', function (req, res, next) {
       rp(options).then((history) => {
         const ret = $
         ret.history = history
+        ret.attributes.forEach((attribute) => {
+          try {
+            ret[attribute.objectTypeAttribute.name] = attribute.objectAttributeValues[0].displayValue
+          } catch {}
+        })
         res.status(200).json(ret)
       })
     })
