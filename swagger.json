@@ -1360,6 +1360,87 @@
                 }
             }
         },
+        "/set/jira/issue/setJiraCreator": {
+            "get": {
+                "tags": [
+                    "Create Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "issueId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "DH-5"
+                    },
+                    {
+                        "name": "from0",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "creator"
+                    },
+                    {
+                        "name": "from1",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "emailAddress"
+                    },
+                    {
+                        "name": "CMDBSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CivilWork"
+                    },
+                    {
+                        "name": "CMDBObjectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "AD_USERS"
+                    },
+                    {
+                        "name": "CMDBObjectAttributeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Email"
+                    },
+                    {
+                        "name": "fieldName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Creator User Info"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/get/jira/issue/issueTypes": {
             "get": {
                 "tags": [
@@ -1620,6 +1701,46 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/allFieldMappingDef"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/issue/CustomFieldID": {
+            "post": {
+                "tags": [
+                    "Get Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CustomFieldIDDef"
                         }
                     }
                 ],
@@ -2134,6 +2255,14 @@
                         "CustomerSubject": "[IBVSD-1] Testing",
                         "CustomerBody": "Email body"
                     }
+                }
+            }
+        },
+        "CustomFieldIDDef": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "example": "Creator User Info"
                 }
             }
         }

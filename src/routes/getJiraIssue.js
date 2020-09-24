@@ -1,5 +1,6 @@
 import express from 'express'
 import rp from 'request-promise'
+import queryString from 'query-string'
 require('dotenv').config()
 
 const router = express.Router();
@@ -195,6 +196,19 @@ router.post('/allFieldMappingAllRev', async (req, res) => {
       newMapping[Object.keys(element)[0]] = element[Object.keys(element)[0]]
     })
     res.send(newMapping)
+  })
+})
+
+router.post('/CustomFieldID', async (req, res) => {
+  const options = {
+    uri: process.env.LOCALHOST + '/get/jira/issue/allFields',
+    json: true
+  }
+  rp(options).then((json) => {
+    res.send(json.filter((row) => {
+      //console.log(req.body)
+      return row.name === req.body.name
+    })[0].id)
   })
 })
 

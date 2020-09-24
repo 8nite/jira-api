@@ -1,5 +1,6 @@
 import express from 'express'
 import rp from 'request-promise'
+import queryString from 'query-string'
 require('dotenv').config()
 
 const router = express.Router();
@@ -44,7 +45,7 @@ const getFieldsIdbyNames = (async (createIssueByName) => {
         Object.keys(createIssueByName).forEach(async (key) => {
           //console.log(key)
           if (key != "project" && key != "issuetype") {
-            let retKey = $.filter((sub) => {return sub.name === key})[0].fieldId
+            let retKey = $.filter((sub) => { return sub.name === key })[0].fieldId
             //console.log(retKey)
             newJson[retKey] = createIssueByName[key]
           } else {
@@ -115,5 +116,85 @@ router.post('/updateIssue', function (req, res, next) {
       res.status(500).send(err)
     })
 });
+
+
+router.get('/setJiraCreator', async (req, res, next) => {
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/issue/issue?issueId=' + req.query.issueId,
+    json: true
+  }
+
+  const CMDBValue = await rp(options)
+    .then(async ($) => {
+      if (!$.fields[req.query.from0][req.query.from1]) {
+        const options2 = {
+          method: 'POST',
+          uri: process.env.LOCALHOST + '/get/jira/issue/CustomFieldID',
+          body: { name: from1 },//'Creator User Info' },
+          json: true
+        }
+      
+        const fromCustomFieldID = await rp(options2)
+          .then(($) => {
+            return $
+          })
+        return $.fields[req.query.from0][fromCustomFieldID]
+      }
+      else
+        return $.fields[req.query.from0][req.query.from1]
+    })
+
+    console.log(CMDBValue)
+
+  let query = {
+    objectSchemaName: req.query.CMDBSchemaName,//'CivilWork',
+    objectTypeName: req.query.CMDBObjectTypeName,//'AD_USERS',
+    attribute: req.query.CMDBObjectAttributeName,//'Email',
+    value: CMDBValue
+  }
+
+  options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/includeAttributObject?' + queryString.stringify(query),
+    json: true
+  }
+
+  const objectKey = await rp(options)
+    .then(($) => {
+      return $[0].Key
+    })
+
+  options = {
+    method: 'POST',
+    uri: process.env.LOCALHOST + '/get/jira/issue/CustomFieldID',
+    body: { name: req.query.fieldName },//'Creator User Info' },
+    json: true
+  }
+
+  const customFieldID = await rp(options)
+    .then(($) => {
+      return $
+    })
+
+  options = {
+    method: 'POST',
+    uri: process.env.LOCALHOST + '/set/jira/issue/updateIssue',
+    body: {
+      "updateIssue": {
+        "issueId": req.query.issueId,
+        "fields": {
+          [customFieldID]: [{"key" : objectKey}]
+        }
+      }
+    },
+    json: true
+  }
+res.send(objectKey)
+  rp(options).then(($) => {
+    return $
+  })
+
+
+
+})
 
 module.exports = router;
