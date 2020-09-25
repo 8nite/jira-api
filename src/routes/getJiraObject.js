@@ -86,7 +86,7 @@ router.get('/objectNametoID', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAURL + '/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.objectType + '&resultPerPage=999',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.objectType + '&resultPerPage=99999',
     json: true
   }
 
@@ -365,10 +365,23 @@ router.get('/includeAttributObject', async (req, res) => {
     })
 
   if (objects) {
-    res.json(objects.filter((entry) => {
-      if (entry[req.query.attribute])
-        return req.query.value.toUpperCase().includes(entry[req.query.attribute].toUpperCase())
-    }))
+    console.log(objects.length)
+    /*const retjson = objects.filter((entry) => {
+      //if (entry[req.query.attribute]) {
+        return true//req.query.value.toUpperCase().includes(entry[req.query.attribute].toUpperCase())
+      //}
+      console.log(retjson)
+      if (retjson)
+        res.json(retjson)
+      else
+        res.json({})
+    })*/
+    let retJson = {}
+    objects.forEach((entry) => {
+      if (req.query.value.toUpperCase() == entry[req.query.attribute].toUpperCase())
+        retJson = [entry]
+    })
+    res.json(retJson)
   } else {
     res.json({})
   }

@@ -126,19 +126,19 @@ router.get('/setJiraCreator', async (req, res, next) => {
 
   const CMDBValue = await rp(options)
     .then(async ($) => {
-      if (!$.fields[req.query.from0][req.query.from1]) {
+      if ($[req.query.from0] && !Object.keys($[req.query.from0]).includes(req.query.from1)) {
         const options2 = {
           method: 'POST',
           uri: process.env.LOCALHOST + '/get/jira/issue/CustomFieldID',
-          body: { name: from1 },//'Creator User Info' },
+          body: { name: req.query.from1 },//'Creator User Info' },
           json: true
         }
       
         const fromCustomFieldID = await rp(options2)
-          .then(($) => {
-            return $
+          .then((ret2) => {
+            return ret2
           })
-        return $.fields[req.query.from0][fromCustomFieldID]
+        return $[req.query.from0][fromCustomFieldID]
       }
       else
         return $.fields[req.query.from0][req.query.from1]
@@ -160,6 +160,7 @@ router.get('/setJiraCreator', async (req, res, next) => {
 
   const objectKey = await rp(options)
     .then(($) => {
+      console.log($)
       return $[0].Key
     })
 
