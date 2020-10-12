@@ -1180,6 +1180,52 @@
                 }
             }
         },
+        "/get/jira/object/keyAttributeValue": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "SS-140207"
+                    },
+                    {
+                        "name": "returnAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/get/jira/object/includeAttributObject": {
             "get": {
                 "tags": [

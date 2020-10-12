@@ -336,6 +336,26 @@ router.get('/attributeValue', async (req, res) => {
   res.json(values)
 })
 
+router.get('/keyAttributeValue', async (req, res) => {
+  let object = await rp({
+    uri: process.env.LOCALHOST + '/get/jira/object/object?objectId=' + req.query.Key,
+    json: true
+  }).then(($) => {
+    return $
+  })
+
+  let item = {
+    id: object.id,
+    label: object.label
+  }
+  object.attributes.forEach((attr) => {
+    if (attr.objectAttributeValues[0]) {
+      item[attr.objectTypeAttribute.name] = attr.objectAttributeValues[0].value || attr.objectAttributeValues[0].referencedObject.label
+    }
+  })
+  res.json(item[req.query.returnAttribute])
+})
+
 router.get('/includeAttributObject', async (req, res) => {
   let query = {
     name: req.query.objectSchemaName
