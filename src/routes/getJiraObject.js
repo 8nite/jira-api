@@ -1,6 +1,7 @@
 import express from 'express'
 import rp from 'request-promise'
 import queryString from 'query-string'
+import fetch from 'node-fetch'
 require('dotenv').config()
 
 const router = express.Router();
@@ -123,7 +124,7 @@ router.get('/objects', function (req, res, next) {
       'user': process.env.JIRAUSER,
       'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/' + req.query.objectTypeId + '/objects',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/' + req.query.objectTypeId + '/objects?start=0&limit=999999',
     json: true
   }
 
@@ -215,16 +216,20 @@ router.get('/objectsWithNamesAttributes', async (req, res) => {
       return $
     })
 
+  let count = 0
   let objects = await ret.map(async (item) => {
-    return await rp({
-      uri: process.env.LOCALHOST + '/get/jira/object/object?objectId=' + item.id.toString(),
-      json: true
-    }).then(($) => {
-      return $
+    count++
+    return new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        return await resolve(fetch(process.env.LOCALHOST + '/get/jira/object/object?objectId=' + item.id.toString()).then(($) => {
+          return $.json()
+        }))
+      }, 100 * count);
     })
   })
 
   Promise.all(objects).then((values) => {
+    console.log(values)
     let ret = values.map((row) => {
       let item = {
         id: row.id,
@@ -327,7 +332,29 @@ router.get('/attributeValue', async (req, res) => {
   const values = await rp(options)
     .then((objects) => {
       return objects.filter((object) => {
-        return object[req.query.findAttribute] == req.query.findValue
+        return object[req.query.findAttribute].toUpperCase() == req.query.findValue.toUpperCase()
+      }).map((item) => {
+        return item[req.query.returnAttribute]
+      })
+    })
+
+  res.json(values)
+})
+
+router.get('/2attributeValue', async (req, res) => {
+  let query = {
+    objectSchemaName: req.query.objectSchemaName,
+    objectTypeName: req.query.objectTypeName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectsWithNamesAttributes?' + queryString.stringify(query),
+    json: true
+  }
+
+  const values = await rp(options)
+    .then((objects) => {
+      return objects.filter((object) => {
+        return object[req.query.findAttribute].toUpperCase() == req.query.findValue.toUpperCase() && object[req.query.findAttribute2].toUpperCase() == req.query.findValue2.toUpperCase()
       }).map((item) => {
         return item[req.query.returnAttribute]
       })
