@@ -332,8 +332,13 @@ router.get('/attributeValue', async (req, res) => {
   const values = await rp(options)
     .then((objects) => {
       return objects.filter((object) => {
-        return object[req.query.findAttribute].toUpperCase() == req.query.findValue.toUpperCase()
+        try {
+          return object[req.query.findAttribute].toUpperCase() == req.query.findValue.toUpperCase()
+        } catch {
+          return false
+        }
       }).map((item) => {
+        console.log(item[req.query.returnAttribute])
         return item[req.query.returnAttribute]
       })
     })
@@ -354,8 +359,13 @@ router.get('/2attributeValue', async (req, res) => {
   const values = await rp(options)
     .then((objects) => {
       return objects.filter((object) => {
-        return object[req.query.findAttribute].toUpperCase() == req.query.findValue.toUpperCase() && object[req.query.findAttribute2].toUpperCase() == req.query.findValue2.toUpperCase()
+        try {
+          return object[req.query.findAttribute].toUpperCase() == req.query.findValue.toUpperCase() && object[req.query.findAttribute2].toUpperCase() == req.query.findValue2.toUpperCase()
+        } catch {
+          return false
+        }
       }).map((item) => {
+        console.log(item[req.query.returnAttribute])
         return item[req.query.returnAttribute]
       })
     })
