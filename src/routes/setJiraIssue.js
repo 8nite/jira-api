@@ -133,7 +133,7 @@ router.get('/setJiraCreator', async (req, res, next) => {
           body: { name: req.query.from1 },//'Creator User Info' },
           json: true
         }
-      
+
         const fromCustomFieldID = await rp(options2)
           .then((ret2) => {
             return ret2
@@ -144,7 +144,7 @@ router.get('/setJiraCreator', async (req, res, next) => {
         return $.fields[req.query.from0][req.query.from1]
     })
 
-    console.log(CMDBValue)
+  console.log(CMDBValue)
 
   let query = {
     objectSchemaName: req.query.CMDBSchemaName,//'CivilWork',
@@ -183,19 +183,61 @@ router.get('/setJiraCreator', async (req, res, next) => {
       "updateIssue": {
         "issueId": req.query.issueId,
         "fields": {
-          [customFieldID]: [{"key" : objectKey}]
+          [customFieldID]: [{ "key": objectKey }]
         }
       }
     },
     json: true
   }
-res.send(objectKey)
+  res.send(objectKey)
   rp(options).then(($) => {
     return $
   })
+})
 
+router.post('/CloneInsightToField', async (req, res, next) => {
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/issue/issueNames?issueId=' + req.body.updateIssue.issueId,
+    json: true
+  }
 
+  const issue = await rp(options)
 
+  const fieldNameInsightId = issue.fields[req.body.updateIssue.fieldName][0].match(/\(([-A-Z0-9]*)\)$/)[1]
+
+  options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/keyAttributeValue?Key=' + fieldNameInsightId + '&returnAttribute=' + req.body.updateIssue.attributeName,
+    json: true
+  }
+  const replaceFieldValue = await rp(options)
+
+  options = {
+    method: 'POST',
+    uri: process.env.LOCALHOST + '/get/jira/issue/CustomFieldID',
+    body: { name: req.body.updateIssue.replaceFieldName },//'Creator User Info' },
+    json: true
+  }
+
+  let customFieldID = await rp(options)
+    .then(($) => {
+      return $
+    })
+
+  options = {
+    method: 'POST',
+    uri: process.env.LOCALHOST + '/set/jira/issue/updateIssue',
+    body: {
+      "updateIssue": {
+        "issueId": req.body.updateIssue.issueId,
+        "fields": {
+          [customFieldID]: replaceFieldValue
+        }
+      }
+    },
+    json: true
+  }
+
+  res.json(await rp(options))
 })
 
 module.exports = router;

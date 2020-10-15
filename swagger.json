@@ -1406,6 +1406,46 @@
                 }
             }
         },
+        "/set/jira/issue/CloneInsightToField": {
+            "post": {
+                "tags": [
+                    "Create Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "updateIssue",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CloneInsightToField"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
         "/set/jira/issue/setJiraCreator": {
             "get": {
                 "tags": [
@@ -2149,6 +2189,19 @@
                         "fields": {
                             "customfield_12020": "TEST"
                         }
+                    }
+                }
+            }
+        },
+        "CloneInsightToField": {
+            "type": "object",
+            "properties": {
+                "updateIssue": {
+                    "example": {
+                        "issueId": "SS-37",
+                        "fieldName": "Service Request Items",
+                        "attributeName": "Support Team",
+                        "replaceFieldName": "UAT"
                     }
                 }
             }
