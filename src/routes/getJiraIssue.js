@@ -54,7 +54,7 @@ router.get('/issueNames', async function (req, res, next) {
     return ret
   })
 
-  let mappedIssue = {...issue}
+  let mappedIssue = { ...issue }
   mappedIssue.fields = {}
 
   Object.keys(issue.fields).forEach((key) => {
@@ -156,6 +156,29 @@ router.get('/allFields', function (req, res, next) {
   rp(options)
     .then(function ($) {
       res.status(200).json($.sort(GetSortOrder()))
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
+router.get('/search', function (req, res, next) {
+  //console.log(req.body)
+  const query = req.query
+  const options = {
+    method: 'GET',
+    auth: {
+      'username': process.env.JIRAUSER,
+      'password': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/api/2/search?' + queryString.stringify(query),
+    json: true
+  }
+
+  rp(options)
+    .then(function ($) {
+      res.status(200).json($)
     })
     .catch(function (err) {
       console.log(err)

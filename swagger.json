@@ -1180,6 +1180,73 @@
                 }
             }
         },
+        "/get/jira/object/attributeValueNew": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "TOC"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Assignment User"
+                    },
+                    {
+                        "name": "findAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Group"
+                    },
+                    {
+                        "name": "findValue",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "TOC"
+                    },
+                    {
+                        "name": "returnAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Email"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/get/jira/object/keyAttributeValue": {
             "get": {
                 "tags": [

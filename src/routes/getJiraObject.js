@@ -163,6 +163,28 @@ router.get('/object', function (req, res, next) {
     })
 });
 
+router.post('/objectQuery', function (req, res, next) {
+  let options = {
+    method: 'POST',
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/insight/1.0/object/navlist/iql',
+    body: req.body,
+    json: true
+  }
+
+  rp(options)
+    .then(function ($) {
+      res.status(200).json($)
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
 router.get('/objectsWithNames', function (req, res, next) {
   let options = {
     auth: {
@@ -319,6 +341,7 @@ router.get('/objectAttributesMapping', async (req, res) => {
 
 })
 
+/*
 router.get('/attributeValue', async (req, res) => {
   let query = {
     objectSchemaName: req.query.objectSchemaName,
@@ -344,6 +367,87 @@ router.get('/attributeValue', async (req, res) => {
     })
 
   res.json(values)
+})
+*/
+
+router.get('/attributeValue', async (req, res) => {
+  let query = {
+    objectSchemaName: req.query.objectSchemaName,
+    objectTypeName: req.query.objectTypeName
+  }
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectSchemaNametoID?name=' + query.objectSchemaName,
+    json: true
+  }
+
+  let objectSchemaId = await rp(options)
+  objectSchemaId = objectSchemaId.id
+
+  options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectTypeNametoID?objectSchemaId=' + objectSchemaId + '&name=' + query.objectTypeName,
+    json: true
+  }
+
+  let objectTypeId = await rp(options)
+  objectTypeId = objectTypeId.id
+
+  options = {
+    method: 'POST',
+    uri: process.env.LOCALHOST + '/get/jira/object/objectQuery',
+    body: {
+      'objectTypeId': objectTypeId,
+      'page': 1,
+      'resultsPerPage': 9999,
+      'includeAttributes': true,
+      'iql': req.query.findAttribute + ' = ' + req.query.findValue,
+      'objectSchemaId': objectSchemaId
+    },
+    json: true
+  }
+
+  //console.log('querying objects')
+  //console.log(options)
+  rp(options).then((objects) => {
+    //console.log('getting number of objects: ' + objects.objectEntries.length)
+    let result = []
+    const values = objects.objectEntries.forEach((object) => {
+      try {
+        object.attributes.forEach((innerObject) => {
+          //console.log(innerObject.objectTypeAttribute.name)
+          //console.log(innerObject.objectAttributeValues[0].value)
+          try {
+            let attValue
+            if (innerObject.objectAttributeValues[0].value) {
+              attValue = innerObject.objectAttributeValues[0].value
+            } else if (innerObject.objectAttributeValues[0].referencedObject.label) {
+              attValue = innerObject.objectAttributeValues[0].referencedObject.label
+            }
+
+            if (innerObject.objectTypeAttribute.name.toUpperCase() === req.query.findAttribute.toUpperCase() && attValue.toUpperCase() === req.query.findValue.toUpperCase()) {
+              object.attributes.forEach((innerObjectReturn) => {
+                let attValueReturn
+                if (innerObjectReturn.objectAttributeValues[0].value) {
+                  attValueReturn = innerObjectReturn.objectAttributeValues[0].value
+                } else if (innerObjectReturn.objectAttributeValues[0].referencedObject.label) {
+                  attValueReturn = innerObjectReturn.objectAttributeValues[0].referencedObject.label
+                }
+
+                if (innerObjectReturn.objectTypeAttribute.name.toUpperCase() === req.query.returnAttribute.toUpperCase()) {
+                  result.push(attValueReturn)
+                  return
+                }
+              })
+              return
+            }
+          } catch { }
+        })
+      } catch {
+        return false
+      }
+    })
+
+    res.json(result)
+  })
 })
 
 router.get('/2attributeValue', async (req, res) => {
@@ -435,7 +539,7 @@ router.get('/includeAttributObject', async (req, res) => {
     })*/
     let retJson = {}
     objects.forEach((entry) => {
-      if (req.query.value.toUpperCase() == entry[req.query.attribute].toUpperCase())
+      if (req.query.value && entry[req.query.attribute] && typeof req.query.value === 'string' && typeof entry[req.query.attribute] === 'string' && req.query.value.toUpperCase() == entry[req.query.attribute].toUpperCase())
         retJson = [entry]
     })
     res.json(retJson)
