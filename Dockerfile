@@ -5,7 +5,7 @@ RUN npm install -g yarn && \
   npm install -g npm-run-all
 RUN mkdir /app && \
   cd /app && \
-  git clone https://0206a657b317ae155248d53becfedaccc14c0859@github.com/herberttung/jira-api.git && \
+  git clone https://0206a657b317ae155248d53becfedaccc14c0859@github.com/herberttung/jira-api.git
 RUN cd /app/jira-api && \
   git checkout SERVER
 RUN cd /app/jira-api && \
