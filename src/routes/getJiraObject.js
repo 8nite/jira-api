@@ -399,7 +399,7 @@ router.get('/attributeValue', async (req, res) => {
       'page': 1,
       'resultsPerPage': 9999,
       'includeAttributes': true,
-      'iql': req.query.findAttribute + ' = ' + req.query.findValue,
+      'iql': req.query.findAttribute + ' = "' + req.query.findValue + '"',
       'objectSchemaId': objectSchemaId
     },
     json: true
