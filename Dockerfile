@@ -7,6 +7,5 @@ RUN npm install -g yarn && \
   yarn install && \
   yarn build
 WORKDIR /
-EXPOSE 0.0.0.0:3000:3000
 ENV LD_LIBRARY_PATH /opt/oracle/instantclient_19_6 && node ./dist-server/app
 CMD ["npm", "start"]
