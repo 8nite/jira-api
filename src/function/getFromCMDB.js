@@ -15,7 +15,7 @@ export const getCMDB = (async (schemaName, sourceType, sourceAttr, attr, ret) =>
         }
 
         const getAssGrpOptions = {
-            uri: 'http://' + process.env.LOCALHOST + ':' + process.env.JIRAAPIPORT + '/get/jira/object/attributeValue?' + queryString.stringify(query),
+            uri: process.env.LOCALHOST + '/get/jira/object/attributeValue?' + queryString.stringify(query),
             json: true
         }
 

@@ -29,6 +29,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "js-base64": "^3.3.2",
+    "json2csv": "^5.0.1",
     "moment": "^2.25.3",
     "moment-timezone": "^0.5.31",
     "morgan": "~1.9.1",

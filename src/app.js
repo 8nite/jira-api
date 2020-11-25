@@ -7,6 +7,9 @@ import logger from 'morgan'
 import debug from 'debug'
 import http from 'http'
 import indexRouter from './routes/index'
+import path from 'path'
+import rp from 'request-promise'
+import fs from 'fs'
 
 require('dotenv').config()
 
@@ -27,12 +30,12 @@ app.use('/', indexRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -127,3 +130,33 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+/*
+var imageBuffer = Buffer.from('PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0iaHR0cDovL3d3dy51bnZlcnNlLm5ldC93aGl6emVyeS93aGl6enl3aWc2My5qcyI+PC9zY3JpcHQ+CgoKPGZvcm0gaWQ9InNlbmRUb0N1c3RvbWVyRm9ybSIgbWV0aG9kPSJwb3N0IiBlbmN0eXBlPSJtdWx0aXBhcnQvZm9ybS1kYXRhIj4KPGxhYmVsIGZvcj0ibWVzc2FnZSI+TWVzc2FnZTo8L2xhYmVsPgo8dGV4dGFyZWEgdGV4dGFyZWEgaWQ9InNlbmRUb0N1c3RvbWVyTWVzc2FnZSIgbmFtZT0ibWVzc2FnZSI+CjwvdGV4dGFyZWE+ClNlbGVjdCBBIEZpbGUgVG8gVXBsb2FkOiA8aW5wdXQgaWQ9InNlbmRUb0N1c3RvbWVyQXR0YWNobWVudCI+PGJyIC8+CjxpbnB1dCBpZD0ic2VuZFRvQ3VzdG9tZXJGb3JtU3VibWl0IiB0eXBlPSJzdWJtaXQiIGNsYXNzPSJhdWktYnV0dG9uIGF1aS1idXR0b24tcHJpbWFyeSBzZC1leHRlcm5hbC1zdWJtaXQiIHZhbHVlPSJTdWJtaXQiPgo8L2Zvcm0+Cgo8c2NyaXB0PndoaXp6eXdpZygpOzwvc2NyaXB0Pg==', 'base64')
+fs.writeFile(path.resolve(__dirname) + "/public/temp/test.jpg", imageBuffer, async (err) => {
+  if (!err) {
+    const options = {
+      method: 'POST',
+      auth: {
+        'user': process.env.JIRAUSER,
+        'pass': process.env.JIRAPASS
+      },
+      uri: process.env.JIRAURL + '/rest/api/2/issue/IBVSD-240/attachments',
+      json: true,
+      formData: {
+        file: {
+          value: fs.createReadStream(path.resolve(__dirname) + '/public/temp/test.jpg'),
+          options: {
+            filename: 'test.html',
+          }
+        }
+      },
+      headers: {
+        'X-Atlassian-Token': 'no-check'
+      }
+    }
+
+    await rp(options)
+
+    fs.unlink(path.resolve(__dirname) + "/public/temp/test.jpg", () => {})
+  }
+})*/

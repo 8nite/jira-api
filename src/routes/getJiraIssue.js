@@ -64,6 +64,7 @@ router.get('/issueNames', async function (req, res, next) {
   res.json(mappedIssue)
 });
 
+/*
 router.get('/issueFields', function (req, res, next) {
   //console.log(req.body)
   const options = {
@@ -72,12 +73,13 @@ router.get('/issueFields', function (req, res, next) {
       'username': process.env.JIRAUSER,
       'password': process.env.JIRAPASS
     },
-    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes/' + req.query.issueTypeId,
+    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/?projectKeys=' + req.query.projectIdOrKey + '&issuetypeIds=' + req.query.issueTypeId,
     json: true,
   }
 
   rp(options)
     .then(function ($) {
+      res.json($)
       let ret = []
       $.values.forEach((item) => {
         let ele = {
@@ -96,7 +98,7 @@ router.get('/issueFields', function (req, res, next) {
       res.status(500).send(err)
     })
 });
-
+*/
 router.get('/issueTypes', function (req, res, next) {
   //console.log(req.body)
   const options = {
@@ -105,7 +107,7 @@ router.get('/issueTypes', function (req, res, next) {
       'username': process.env.JIRAUSER,
       'password': process.env.JIRAPASS
     },
-    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
+    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/?projectKeys=' + req.query.projectIdOrKey,
     json: true
   }
 
@@ -127,13 +129,13 @@ router.get('/issueTypeNametoId', function (req, res, next) {
       'username': process.env.JIRAUSER,
       'password': process.env.JIRAPASS
     },
-    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/' + req.query.projectIdOrKey + '/issuetypes',
+    uri: process.env.JIRAURL + '/rest/api/2/issue/createmeta/?projectKeys=' + req.query.projectIdOrKey,
     json: true
   }
 
   rp(options)
     .then(function ($) {
-      res.status(200).json({ id: $.values.filter((set) => { return set.name === req.query.issueTypeName })[0].id })
+      res.status(200).json({ id: $.projects[0].issuetypes.filter((set) => { return set.name === req.query.issueTypeName })[0].id })
     })
     .catch(function (err) {
       console.log(err)
