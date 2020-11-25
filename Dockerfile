@@ -1,4 +1,5 @@
 FROM mhart/alpine-node
+VOLUME /
 RUN apk add --update git && \
   rm -rf /tmp/* /var/cache/apk/*
 RUN npm install -g yarn && \
@@ -6,6 +7,6 @@ RUN npm install -g yarn && \
   npm install -g forever && \
   yarn install && \
   yarn build
-WORKDIR .
+WORKDIR /
 ENV LD_LIBRARY_PATH /opt/oracle/instantclient_19_6 && node ./dist-server/app
 CMD ["npm", "start"]
