@@ -1,5 +1,6 @@
 import express from 'express'
 import rp from 'request-promise'
+import queryString from 'query-string'
 require('dotenv').config()
 
 const router = express.Router();
@@ -53,7 +54,7 @@ router.get('/issueNames', async function (req, res, next) {
     return ret
   })
 
-  let mappedIssue = {...issue}
+  let mappedIssue = { ...issue }
   mappedIssue.fields = {}
 
   Object.keys(issue.fields).forEach((key) => {
@@ -164,6 +165,29 @@ router.get('/allFields', function (req, res, next) {
     })
 });
 
+router.get('/search', function (req, res, next) {
+  //console.log(req.body)
+  const query = req.query
+  const options = {
+    method: 'GET',
+    auth: {
+      'username': process.env.JIRAUSER,
+      'password': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/api/2/search?' + queryString.stringify(query),
+    json: true
+  }
+
+  rp(options)
+    .then(function ($) {
+      res.status(200).json($)
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
 router.post('/allFieldMapping', async (req, res) => {
   const options = {
     uri: process.env.LOCALHOST + '/get/jira/issue/allFields',
@@ -197,6 +221,19 @@ router.post('/allFieldMappingAllRev', async (req, res) => {
       newMapping[Object.keys(element)[0]] = element[Object.keys(element)[0]]
     })
     res.send(newMapping)
+  })
+})
+
+router.post('/CustomFieldID', async (req, res) => {
+  const options = {
+    uri: process.env.LOCALHOST + '/get/jira/issue/allFields',
+    json: true
+  }
+  rp(options).then((json) => {
+    res.send(json.filter((row) => {
+      //console.log(req.body)
+      return row.name === req.body.name
+    })[0].id)
   })
 })
 

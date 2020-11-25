@@ -1180,6 +1180,119 @@
                 }
             }
         },
+        "/get/jira/object/attributeValueNew": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "TOC"
+                    },
+                    {
+                        "name": "objectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Assignment User"
+                    },
+                    {
+                        "name": "findAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Group"
+                    },
+                    {
+                        "name": "findValue",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "TOC"
+                    },
+                    {
+                        "name": "returnAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Email"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/object/keyAttributeValue": {
+            "get": {
+                "tags": [
+                    "Get Jira Objects"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Key",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "SS-140207"
+                    },
+                    {
+                        "name": "returnAttribute",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/get/jira/object/includeAttributObject": {
             "get": {
                 "tags": [
@@ -1355,6 +1468,127 @@
                         "description": "Failed",
                         "schema": {
                             "type": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "/set/jira/issue/CloneInsightToField": {
+            "post": {
+                "tags": [
+                    "Create Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "updateIssue",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CloneInsightToField"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "/set/jira/issue/setJiraCreator": {
+            "get": {
+                "tags": [
+                    "Create Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "issueId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "DH-5"
+                    },
+                    {
+                        "name": "from0",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "creator"
+                    },
+                    {
+                        "name": "from1",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "emailAddress"
+                    },
+                    {
+                        "name": "CMDBSchemaName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CivilWork"
+                    },
+                    {
+                        "name": "CMDBObjectTypeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "AD_USERS"
+                    },
+                    {
+                        "name": "CMDBObjectAttributeName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Email"
+                    },
+                    {
+                        "name": "fieldName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Creator User Info"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -1620,6 +1854,46 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/allFieldMappingDef"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/jira/issue/CustomFieldID": {
+            "post": {
+                "tags": [
+                    "Get Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CustomFieldIDDef"
                         }
                     }
                 ],
@@ -1982,6 +2256,19 @@
                         "fields": {
                             "customfield_12020": "TEST"
                         }
+                    }
+                }
+            }
+        },
+        "CloneInsightToField": {
+            "type": "object",
+            "properties": {
+                "updateIssue": {
+                    "example": {
+                        "issueId": "SS-37",
+                        "fieldName": "Service Request Items",
+                        "attributeName": "Support Team",
+                        "replaceFieldName": "UAT"
                     }
                 }
             }
@@ -2852,6 +3139,14 @@
                         "CustomerSubject": "[IBVSD-1] Testing",
                         "CustomerBody": "Email body"
                     }
+                }
+            }
+        },
+        "CustomFieldIDDef": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "example": "Creator User Info"
                 }
             }
         }
