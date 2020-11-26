@@ -8,7 +8,7 @@ RUN mkdir /app && \
   cd /app && \
   git clone https://github.com/herberttung/jira-api.git
 RUN cd /app/jira-api && \
-  git checkout master
+  git checkout UAT
 RUN cd /app/jira-api && \
   yarn install && \
   yarn build
