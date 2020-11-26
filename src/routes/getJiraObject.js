@@ -8,10 +8,11 @@ const router = express.Router();
 
 router.get('/objectSchemaNametoID', (req, res) => {
   const options = {
-    headers: {
-      'Authorization': process.env.JIRAINSIGHTTOKEN
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAINSIGHTURL + '/rest/insight/1.0/objectschema/list',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/list',
     json: true
   }
 
@@ -32,10 +33,11 @@ router.get('/objectSchemaNametoID', (req, res) => {
 
 router.get('/objectSchemaKeytoID', function (req, res, next) {
   const options = {
-    headers: {
-      'Authorization': process.env.JIRAINSIGHTTOKEN
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAINSIGHTURL + '/rest/insight/1.0/objectschema/list',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/list',
     json: true
   }
 
@@ -56,10 +58,11 @@ router.get('/objectSchemaKeytoID', function (req, res, next) {
 
 router.get('/objectTypeNametoID', function (req, res, next) {
   const options = {
-    headers: {
-      'Authorization': process.env.JIRAINSIGHTTOKEN
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAINSIGHTURL + '/rest/insight/1.0/objectschema/' + req.query.objectSchemaId + '/objecttypes/flat',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objectschema/' + req.query.objectSchemaId + '/objecttypes/flat',
     json: true
   }
 
@@ -80,8 +83,9 @@ router.get('/objectTypeNametoID', function (req, res, next) {
 
 router.get('/objectNametoID', function (req, res, next) {
   const options = {
-    headers: {
-      'Authorization': process.env.JIRAINSIGHTTOKEN
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
     uri: process.env.JIRAURL + '/rest/insight/1.0/iql/objects?objectSchemaId=' + req.query.objectSchemaId + '&iql=ObjectType=' + req.query.objectType + '&resultPerPage=99999',
     json: true
@@ -114,11 +118,11 @@ router.get('/objectNametoID', function (req, res, next) {
     })
 });
 
-/* Cant use on cloud
 router.get('/objects', function (req, res, next) {
   const options = {
-    headers: {
-       'Authorization': process.env.JIRAINSIGHTTOKEN
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
     uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/' + req.query.objectTypeId + '/objects?start=0&limit=999999',
     json: true
@@ -133,28 +137,23 @@ router.get('/objects', function (req, res, next) {
       res.status(500).send(err)
     })
 });
-*/
 
 router.get('/object', function (req, res, next) {
   let options = {
-    headers: {
-      'Authorization': process.env.JIRAINSIGHTTOKEN
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAINSIGHTURL + '/rest/insight/1.0/object/' + req.query.objectId + '',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/object/' + req.query.objectId + '',
     json: true
   }
 
   rp(options)
     .then(function ($) {
-      options.uri = process.env.JIRAINSIGHTURL + '/rest/insight/1.0/object/' + req.query.objectId + '/history'
+      options.uri = process.env.JIRAURL + '/rest/insight/1.0/object/' + req.query.objectId + '/history'
       rp(options).then((history) => {
         const ret = $
         ret.history = history
-        ret.attributes.forEach((attribute) => {
-          try {
-            ret[attribute.objectTypeAttribute.name] = attribute.objectAttributeValues[0].displayValue
-          } catch {}
-        })
         res.status(200).json(ret)
       })
     })
@@ -188,6 +187,10 @@ router.post('/objectQuery', function (req, res, next) {
 
 router.get('/objectsWithNames', function (req, res, next) {
   let options = {
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
+    },
     uri: process.env.LOCALHOST + '/get/jira/object/objectSchemaNametoID?name=' + req.query.objectSchemaName,
     json: true
   }
@@ -195,14 +198,23 @@ router.get('/objectsWithNames', function (req, res, next) {
   rp(options)
     .then(function ($) {
       const objectSchemaId = $.id
-      options.uri = process.env.LOCALHOST + '/get/jira/object/objectNametoID?objectSchemaId=' + objectSchemaId + '&objectType=' + req.query.objectTypeName
+      options.uri = process.env.LOCALHOST + '/get/jira/object/objectTypeNametoID?objectSchemaId=' + objectSchemaId + '&name=' + req.query.objectTypeName
       rp(options)
         .then(($) => {
-          res.status(200).json($)
+          const objectTypeId = $.id
+          options.uri = process.env.LOCALHOST + '/get/jira/object/objects?objectTypeId=' + objectTypeId
+          rp(options)
+            .then(($) => {
+              res.status(200).json($)
+            })
+            .catch(function (err) {
+              console.log(err)
+              res.status(500).send({ err })
+            })
         })
         .catch(function (err) {
           console.log(err)
-          res.status(500).send({ err })
+          res.status(500).send(err)
         })
     })
     .catch(function (err) {
@@ -303,10 +315,11 @@ router.get('/objectAttributesMapping', async (req, res) => {
     })
 
   options = {
-    headers: {
-      'Authorization': process.env.JIRAINSIGHTTOKEN
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
     },
-    uri: process.env.JIRAINSIGHTURL + '/rest/insight/1.0/objecttype/' + objectTypeId + '/attributes',
+    uri: process.env.JIRAURL + '/rest/insight/1.0/objecttype/' + objectTypeId + '/attributes',
     json: true
   }
 
@@ -351,9 +364,6 @@ router.get('/attributeValue', async (req, res) => {
         console.log(item[req.query.returnAttribute])
         return item[req.query.returnAttribute]
       })
-    })
-    .catch((err) => {
-      return err
     })
 
   res.json(values)
