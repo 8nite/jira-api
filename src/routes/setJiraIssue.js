@@ -240,4 +240,31 @@ router.post('/CloneInsightToField', async (req, res, next) => {
   res.json(await rp(options))
 })
 
+
+router.get('/addWatcher', function (req, res, next) {
+  //console.log(req.body)
+  const issueId = req.query.issueId
+  const name = req.query.name
+  const options = {
+    method: 'POST',
+    auth: {
+      'user': process.env.JIRAUSER,
+      'pass': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/api/latest/issue/' + issueId + '/watchers',
+    json: true,
+    body: name
+  }
+  //console.log(req.body.updateIssue)
+
+  rp(options)
+    .then(function ($) {
+      res.status(200).json($)
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
 module.exports = router;
