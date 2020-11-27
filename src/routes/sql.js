@@ -11,7 +11,7 @@ router.get('/getTableData', async (req, res, next) => {
     {
       user: req.query.user,
       password: req.query.password,
-      connectString: "NOC"
+      connectString: req.query.connString
     },
     async function (err, connection) {
       if (err) {
@@ -63,14 +63,14 @@ router.get('/getSQL', async (req, res, next) => {
 router.post('/insertSQL', async (req, res, next) => {
   oracledb.getConnection(
     {
-      user: "dsbs",
-      password: "abc123",
-      connectString: "172.25.15.138:1521/fbiu"
+      user: req.body.sql.user,
+      password: req.body.sql.password,
+      connectString: req.body.sql.connString
     },
     async function (err, connection) {
       console.error('connected!')
       if (err) { console.error(err); return; }
-      let valueText = 'INSERT INTO ' + req.body.sql.tableName + ' VALUES ('
+      let valueText = 'INSERT INTO ' + req.body.sql.tableName + ' (' + req.body.sql.fields.join(',') + ') VALUES ('
       let valueArray = []
       let count = 1
       req.body.sql.values.forEach((element) => {
@@ -96,6 +96,7 @@ router.post('/insertSQL', async (req, res, next) => {
       } catch (err) {
         if (err)
           console.error(err);
+          res.status(500).send(err)
       }
     });
 })

@@ -530,7 +530,7 @@
                         "in": "query",
                         "required": true,
                         "type": "string",
-                        "default": "dsbs"
+                        "default": "jis"
                     },
                     {
                         "name": "password",
@@ -544,14 +544,14 @@
                         "in": "query",
                         "required": true,
                         "type": "string",
-                        "default": "172.25.15.138:1521/fbiu"
+                        "default": "192.168.44.150:1521/fasu"
                     },
                     {
                         "name": "tableName",
                         "in": "query",
                         "required": true,
                         "type": "string",
-                        "default": "DSBS.JIRA_CPE_TYPE"
+                        "default": "nh_staff_profile"
                     }
                 ],
                 "responses": {
@@ -2324,23 +2324,14 @@
             "type": "object",
             "properties": {
                 "sql": {
-                    "type": "object",
-                    "properties": {
-                        "tableName": {
-                            "type": "string",
-                            "enum": "DSBS.JIRA_CPE_TYPE"
-                        },
-                        "values": {
-                            "example": [
-                                "123",
-                                "123",
-                                "123",
-                                "2020-05-07 07:25:07",
-                                "123",
-                                "2020-05-07 07:25:07"
-                            ]
-                        }
-                    }
+                    "example": {
+                        "user": "jis",
+                        "password": "abc123",
+                        "connString": "192.168.44.150:1521/fasu",
+                        "tableName": "nh_staff_profile",
+                        "fields": ["REFNO"],
+                        "values": ["123"]
+                    }                    
                 }
             }
         },
