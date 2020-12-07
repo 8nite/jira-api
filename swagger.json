@@ -570,6 +570,66 @@
                 }
             }
         },
+        "/sql/getTableHeader": {
+            "get": {
+                "tags": [
+                    "Get SQL"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "ods"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Hgc0809"
+                    },
+                    {
+                        "name": "connString",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "10.11.48.102:1526/odsd"
+                    },
+                    {
+                        "name": "tableName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CIVIL_WORK_EST"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/sql/getSQL": {
             "get": {
                 "tags": [
@@ -2325,12 +2385,14 @@
             "properties": {
                 "sql": {
                     "example": {
-                        "user": "jis",
-                        "password": "abc123",
-                        "connString": "192.168.44.150:1521/fasu",
-                        "tableName": "nh_staff_profile",
-                        "fields": ["REFNO"],
-                        "values": ["123"]
+                        "user": "ods",
+                        "password": "Hgc0809",
+                        "connString": "10.11.48.102:1526/odsd",
+                        "tableName": "CIVIL_WORK_EST",
+                        "formatting": true,
+                        "delRow": {"REQUEST_NO": "TESTING"},
+                        "fields": ["REQUEST_NO", "PROJECT_NAME"],
+                        "values": ["TESTING", "TEST_PROJECT"]
                     }                    
                 }
             }
