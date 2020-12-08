@@ -1,7 +1,9 @@
 import express from 'express'
 import mysql from 'mysql'
 import oracledb from 'oracledb'
+import queryString from 'query-string'
 import moment from 'moment'
+import rp from 'request-promise'
 require('dotenv').config()
 
 const router = express.Router();
@@ -11,7 +13,7 @@ router.get('/getTableData', async (req, res, next) => {
     {
       user: req.query.user,
       password: req.query.password,
-      connectString: "NOC"
+      connectString: req.query.connString
     },
     async function (err, connection) {
       if (err) {
@@ -28,11 +30,47 @@ router.get('/getTableData', async (req, res, next) => {
         // fetchArraySize: 100       // internal buffer allocation size for tuning
       };
 
-      let result = await connection.execute(sql, binds, options);
-      console.log(result)
-      res.send(result)
+      try {
+        let result = await connection.execute(sql, binds, options);
+        console.log(result)
+        res.send(result)
+      } catch (e) {
+        res.send(e)
+      }
     })
 
+})
+
+router.get('/getTableHeader', async (req, res, next) => {
+  oracledb.extendedMetaData = true
+  oracledb.getConnection(
+    {
+      user: req.query.user,
+      password: req.query.password,
+      connectString: req.query.connString
+    },
+    async function (err, connection) {
+      if (err) {
+        console.error(err, req.query.connString)
+        res.send(err)
+      }
+      const sql = "SELECT * FROM " + req.query.tableName
+      let binds = {};
+
+      // For a complete list of options see the documentation.
+      let options = {
+        outFormat: oracledb.OUT_FORMAT_OBJECT   // query result format
+        // extendedMetaData: true,   // get extra metadata
+        // fetchArraySize: 100       // internal buffer allocation size for tuning
+      };
+      try {
+        let result = await connection.execute(sql, binds);
+        //console.log(result)
+        res.send(result)
+      } catch (e) {
+        res.send(e)
+      }
+    })
 })
 
 router.get('/getSQL', async (req, res, next) => {
@@ -63,17 +101,110 @@ router.get('/getSQL', async (req, res, next) => {
 router.post('/insertSQL', async (req, res, next) => {
   oracledb.getConnection(
     {
-      user: "dsbs",
-      password: "abc123",
-      connectString: "172.25.15.138:1521/fbiu"
+      user: req.body.sql.user,
+      password: req.body.sql.password,
+      connectString: req.body.sql.connString
     },
     async function (err, connection) {
       console.error('connected!')
       if (err) { console.error(err); return; }
-      let valueText = 'INSERT INTO ' + req.body.sql.tableName + ' VALUES ('
+      //Reformating
+      console.log('trying to meta data')
+      let metaData
+      const formatting = req.body.sql.formatting
+      if (formatting) {
+        let query = {
+          user: req.body.sql.user,
+          password: req.body.sql.password,
+          connString: req.body.sql.connString,
+          tableName: req.body.sql.tableName
+        }
+        metaData = await rp({
+          uri: process.env.LOCALHOST + '/sql/getTableHeader?' + queryString.stringify(query),
+          json: true
+        }).then(($) => {
+          return $.metaData
+        })
+        console.log('got meta data')
+      }
+      //Delete before insert
+      try {
+        console.log('trying to remove data before insert')
+        const delRow = req.body.sql.delRow
+        if (Object.keys(delRow).length > 0) {
+          let sql = 'DELETE FROM ' + req.body.sql.tableName + ' WHERE '
+          let values = []
+          let count = 1
+          Object.keys(delRow).forEach((field) => {
+            if (moment(delRow[field], "YYYY-MM-DD HH:mm:ss", true).isValid()) {
+              sql += field + ' = :' + count.toString() + ' AND '
+              values.push('TO_DATE(' + moment(field).format('YYYY/MM/DD HH:mm:ss') + '\' = \'' + delRow[field] + '\', \'yyyy/mm/dd hh24:mi:ss\'))')
+            } else {
+              sql += field + ' = :' + count.toString() + ' AND '
+              values.push(delRow[field])
+            }
+          })
+          sql = sql.substring(0, sql.length - 4)
+          console.log(sql)
+          console.log(values)
+          const result = await connection.execute(sql, values, { autoCommit: true })
+          console.log('removed data before insert')
+        }
+      } catch (e) {
+        console.log(e)
+      }
+
+      //insert
+      let insertFields = req.body.sql.fields
+      let insertValues = req.body.sql.values
+
+      if (formatting) {
+        console.log('formatting to match metadata')
+        insertFields = []
+        insertValues = []
+        metaData.forEach((col) => {
+          let index
+          let count = 0
+          req.body.sql.fields.forEach((field) => {
+            if (col.name === field) {
+              index = count
+            }
+            count++
+          })
+          if (index || index == 0) {
+            if (col.dbTypeName.includes('VARCHAR')) {
+              if (req.body.sql.values[index].length * 2 <= col.byteSize) {
+                insertFields.push(col.name)
+                insertValues.push(req.body.sql.values[index])
+              }
+              else if (req.body.sql.values[index].length * 2 > col.byteSize) {
+                insertFields.push(col.name)
+                insertValues.push(req.body.sql.values[index].substring(0, Math.floor(col.byteSize / 2)))
+              }
+            }
+            else if (col.dbTypeName.includes('DATE')) {
+              insertFields.push(col.name)
+              insertValues.push(req.body.sql.values[index].substring(0, Math.floor(col.byteSize / 2)))
+            }
+            else if (col.dbTypeName.includes('NUMBER')) {
+              insertFields.push(col.name)
+              try {
+                insertValues.push(Math.round(req.body.sql.values[index] * col.precision) / col.precision)
+              } catch {
+                insertValues.push(0)
+              }
+            }
+          }
+        })
+        console.log('done formatting')
+        console.log(insertFields)
+        console.log(insertValues)
+      }
+      console.log('inserting data')
+      let valueText = 'INSERT INTO ' + req.body.sql.tableName + ' (' + insertFields.join(',') + ') VALUES ('
       let valueArray = []
       let count = 1
-      req.body.sql.values.forEach((element) => {
+      insertValues.forEach((element) => {
         //console.log(element)
         if (moment(element, "YYYY-MM-DD HH:mm:ss", true).isValid()) {
           valueText += "TO_DATE(:" + count.toString() + ", 'yyyy-mm-dd hh24:mi:ss'),"
@@ -92,10 +223,12 @@ router.post('/insertSQL', async (req, res, next) => {
       try {
         const result = await connection.execute(sql, values, { autoCommit: true })
         console.log(result)
+        console.log('done inserting data')
         res.send(result)
       } catch (err) {
         if (err)
           console.error(err);
+        res.status(500).send(err)
       }
     });
 })

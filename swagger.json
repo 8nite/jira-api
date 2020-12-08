@@ -530,7 +530,7 @@
                         "in": "query",
                         "required": true,
                         "type": "string",
-                        "default": "dsbs"
+                        "default": "jis"
                     },
                     {
                         "name": "password",
@@ -544,14 +544,74 @@
                         "in": "query",
                         "required": true,
                         "type": "string",
-                        "default": "172.25.15.138:1521/fbiu"
+                        "default": "192.168.44.150:1521/fasu"
                     },
                     {
                         "name": "tableName",
                         "in": "query",
                         "required": true,
                         "type": "string",
-                        "default": "DSBS.JIRA_CPE_TYPE"
+                        "default": "nh_staff_profile"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sql/getTableHeader": {
+            "get": {
+                "tags": [
+                    "Get SQL"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "ods"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "Hgc0809"
+                    },
+                    {
+                        "name": "connString",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "10.11.48.102:1526/odsd"
+                    },
+                    {
+                        "name": "tableName",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "CIVIL_WORK_EST"
                     }
                 ],
                 "responses": {
@@ -2324,23 +2384,16 @@
             "type": "object",
             "properties": {
                 "sql": {
-                    "type": "object",
-                    "properties": {
-                        "tableName": {
-                            "type": "string",
-                            "enum": "DSBS.JIRA_CPE_TYPE"
-                        },
-                        "values": {
-                            "example": [
-                                "123",
-                                "123",
-                                "123",
-                                "2020-05-07 07:25:07",
-                                "123",
-                                "2020-05-07 07:25:07"
-                            ]
-                        }
-                    }
+                    "example": {
+                        "user": "ods",
+                        "password": "Hgc0809",
+                        "connString": "10.11.48.102:1526/odsd",
+                        "tableName": "CIVIL_WORK_EST",
+                        "formatting": true,
+                        "delRow": {"REQUEST_NO": "TESTING"},
+                        "fields": ["REQUEST_NO", "PROJECT_NAME"],
+                        "values": ["TESTING", "TEST_PROJECT"]
+                    }                    
                 }
             }
         },

@@ -241,7 +241,7 @@ router.post('/CloneInsightToField', async (req, res, next) => {
 })
 
 
-router.get('/addWatcher', function (req, res, next) {
+router.get('/addParticipant', function (req, res, next) {
   //console.log(req.body)
   const issueId = req.query.issueId
   const name = req.query.name
