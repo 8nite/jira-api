@@ -1940,6 +1940,45 @@
                 }
             }
         },
+        "/get/jira/issue/issueScreenFields": {
+            "get": {
+                "tags": [
+                    "Get Jira Issue"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "screenId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "default": "11547"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/get/jira/issue/allFieldMapping": {
             "post": {
                 "tags": [

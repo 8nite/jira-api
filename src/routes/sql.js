@@ -172,43 +172,52 @@ router.post('/insertSQL', async (req, res, next) => {
             count++
           })
           if (index || index == 0) {
-            if (col.dbTypeName.includes('VARCHAR')) {
-              if (req.body.sql.values[index].length * 2 <= col.byteSize) {
+            try {
+              if (col.dbTypeName.includes('VARCHAR')) {
+                if (req.body.sql.values[index].length * 2 <= col.byteSize) {
+                  insertFields.push(col.name)
+                  insertValues.push(req.body.sql.values[index])
+                }
+                else if (req.body.sql.values[index].length * 2 > col.byteSize) {
+                  insertFields.push(col.name)
+                  insertValues.push(req.body.sql.values[index].substring(0, Math.floor(col.byteSize / 2)))
+                }
+              }
+              else if (col.dbTypeName.includes('DATE')) {
                 insertFields.push(col.name)
                 insertValues.push(req.body.sql.values[index])
               }
-              else if (req.body.sql.values[index].length * 2 > col.byteSize) {
-                insertFields.push(col.name)
-                insertValues.push(req.body.sql.values[index].substring(0, Math.floor(col.byteSize / 2)))
+              else if (col.dbTypeName.includes('NUMBER')) {
+                try {
+                  if (!isNaN(parseFloat(req.body.sql.values[index]))) {
+                    insertValues.push(Math.round(req.body.sql.values[index] * col.precision) / col.precision)
+                    insertFields.push(col.name)
+                  }
+                } catch {
+                  //insertValues.push(0)
+                }
               }
-            }
-            else if (col.dbTypeName.includes('DATE')) {
-              insertFields.push(col.name)
-              insertValues.push(req.body.sql.values[index].substring(0, Math.floor(col.byteSize / 2)))
-            }
-            else if (col.dbTypeName.includes('NUMBER')) {
-              insertFields.push(col.name)
-              try {
-                insertValues.push(Math.round(req.body.sql.values[index] * col.precision) / col.precision)
-              } catch {
-                insertValues.push(0)
-              }
-            }
+            } catch { }
           }
         })
         console.log('done formatting')
-        console.log(insertFields)
-        console.log(insertValues)
+        //console.log(insertFields)
+        //console.log(insertValues)
       }
       console.log('inserting data')
       let valueText = 'INSERT INTO ' + req.body.sql.tableName + ' (' + insertFields.join(',') + ') VALUES ('
       let valueArray = []
       let count = 1
       insertValues.forEach((element) => {
-        //console.log(element)
-        if (moment(element, "YYYY-MM-DD HH:mm:ss", true).isValid()) {
-          valueText += "TO_DATE(:" + count.toString() + ", 'yyyy-mm-dd hh24:mi:ss'),"
-          valueArray.push(moment(element, "YYYY-MM-DD HH:mm:ss").format('YYYY-MM-DD HH:mm:ss').toString())
+        //console.log(valueText)
+        //console.log(valueArray)
+        //console.log(element.substring(0,19).replace('T', ' '))
+        //console.log(moment(element.substring(0,19).replace('T', ' '), "YYYY-MM-DD HH:mm:ss", true).isValid())
+        if (moment(element.substring(0,19).replace('T', ' '), "YYYY-MM-DD HH:mm:ss", true).isValid()) {
+          //console.log('THIS IS DATE')
+          //console.log(element)
+          valueText += "TO_DATE(:" + count.toString() + ", 'YYYY-MM-DD HH24:MI:SS'),"
+          valueArray.push(moment(element.substring(0,19).replace('T', ' '), "YYYY-MM-DD HH:mm:ss").format('YYYY-MM-DD HH:mm:ss').toString())
         } else {
           valueText += ":" + count.toString() + ","
           valueArray.push(element)
@@ -218,11 +227,11 @@ router.post('/insertSQL', async (req, res, next) => {
       valueText = valueText.substring(0, valueText.length - 1) + ')'
       const sql = valueText
       const values = valueArray
-      console.log(valueText)
-      console.log(valueArray)
+      //console.log(valueText)
+      //console.log(valueArray)
       try {
         const result = await connection.execute(sql, values, { autoCommit: true })
-        console.log(result)
+        //console.log(result)
         console.log('done inserting data')
         res.send(result)
       } catch (err) {

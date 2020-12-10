@@ -64,7 +64,7 @@ router.get('/issueNames', async function (req, res, next) {
   res.json(mappedIssue)
 });
 
-/*
+
 router.get('/issueFields', function (req, res, next) {
   //console.log(req.body)
   const options = {
@@ -98,7 +98,29 @@ router.get('/issueFields', function (req, res, next) {
       res.status(500).send(err)
     })
 });
-*/
+
+router.get('/issueScreenFields', function (req, res, next) {
+  //console.log(req.body)
+  const options = {
+    method: 'GET',
+    auth: {
+      'username': process.env.JIRAUSER,
+      'password': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/api/2/screens/' + req.query.screenId + '/availableFields',
+    json: true,
+  }
+
+  rp(options)
+    .then(function ($) {
+      res.json($)
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
 router.get('/issueTypes', function (req, res, next) {
   //console.log(req.body)
   const options = {
