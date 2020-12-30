@@ -196,6 +196,7 @@ router.get('/setJiraCreator', async (req, res, next) => {
 })
 
 router.post('/CloneInsightToField', async (req, res, next) => {
+  console.log('CloneInsightToField')
   let options = {
     uri: process.env.LOCALHOST + '/get/jira/issue/issueNames?issueId=' + req.body.updateIssue.issueId,
     json: true
@@ -204,12 +205,15 @@ router.post('/CloneInsightToField', async (req, res, next) => {
   const issue = await rp(options)
 
   const fieldNameInsightId = issue.fields[req.body.updateIssue.fieldName][0].match(/\(([-A-Z0-9]*)\)$/)[1]
+  console.log(fieldNameInsightId)
 
   options = {
     uri: process.env.LOCALHOST + '/get/jira/object/keyAttributeValue?Key=' + fieldNameInsightId + '&returnAttribute=' + req.body.updateIssue.attributeName,
     json: true
   }
-  const replaceFieldValue = await rp(options)
+  let replaceFieldValue = await rp(options)
+  console.log('replacing: ')
+  console.log(replaceFieldValue)
 
   options = {
     method: 'POST',

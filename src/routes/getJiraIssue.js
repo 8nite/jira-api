@@ -64,7 +64,7 @@ router.get('/issueNames', async function (req, res, next) {
   res.json(mappedIssue)
 });
 
-/*
+
 router.get('/issueFields', function (req, res, next) {
   //console.log(req.body)
   const options = {
@@ -98,7 +98,59 @@ router.get('/issueFields', function (req, res, next) {
       res.status(500).send(err)
     })
 });
-*/
+
+router.get('/issueScreenFields', function (req, res, next) {
+  //console.log(req.body)
+  const options = {
+    method: 'GET',
+    auth: {
+      'username': process.env.JIRAUSER,
+      'password': process.env.JIRAPASS
+    },
+    uri: process.env.JIRAURL + '/rest/api/2/screens/' + req.query.screenId + '/tabs',
+    json: true,
+  }
+
+  rp(options)
+    .then(function ($) {
+      //console.log($)
+      let requests = []
+      requests = $.map(async (tab) => {
+        const options2 = {
+          method: 'GET',
+          auth: {
+            'username': process.env.JIRAUSER,
+            'password': process.env.JIRAPASS
+          },
+          uri: process.env.JIRAURL + '/rest/api/2/screens/' + req.query.screenId + '/tabs/' + tab.id + '/fields',
+          json: true,
+        }
+
+        return await rp(options2)
+          .then(function (fieldsLong) {
+            //console.log(fieldsLong)
+            return fieldsLong
+          })
+          .catch(function (err) {
+            console.log(err)
+            return
+          })
+      })
+      console.log(requests)
+      Promise.all(requests).then((values) => {
+        //console.log(values)
+
+        values.reduce(function (arr, row) {
+          res.json(arr.concat(row))
+        }, []);
+      })
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
 router.get('/issueTypes', function (req, res, next) {
   //console.log(req.body)
   const options = {
