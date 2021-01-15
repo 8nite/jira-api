@@ -138,6 +138,84 @@ router.get('/objects', function (req, res, next) {
     })
 });
 
+router.get('/objectsConcatAttribute', function (req, res, next) {
+  let options = {
+    uri: process.env.LOCALHOST + '/get/jira/object/objectSchemaNametoID?name=' + req.query.objectSchemaName,
+    json: true
+  }
+
+  rp(options)
+    .then(function ($) {
+      const objectSchemaId = $.id
+      options.uri = process.env.LOCALHOST + '/get/jira/object/objectTypeNametoID?objectSchemaId=' + objectSchemaId + '&name=' + req.query.objectTypeName
+      rp(options)
+        .then(($) => {
+          const objectTypeId = $.id
+          options = {
+            method: 'POST',
+            uri: process.env.LOCALHOST + '/get/jira/object/objectQuery',
+            body: {
+              'objectTypeId': objectTypeId,
+              'page': 1,
+              'resultsPerPage': 9999,
+              'includeAttributes': true,
+              'objectSchemaId': objectSchemaId
+            },
+            json: true
+          }
+          rp(options)
+            .then(($) => {
+              const result = $.objectEntries.map((entry) => {
+                const retAttri = {}
+                entry.attributes.forEach((attribute) => {
+                  const keyJ = attribute.objectTypeAttribute.name
+                  let skip = false
+                  req.query.output.split('|').forEach((nameKey) => {
+                    if (keyJ === nameKey) {
+                      skip = true
+                    }
+                  })
+                  if (skip)
+                    return
+                  let valueJ = null
+                  try {
+                    valueJ = attribute.objectAttributeValues[0].value
+                  } catch { }
+                  try {
+                    valueJ = attribute.objectAttributeValues[0].referencedObject.label
+                  } catch { }
+                  retAttri[keyJ] = valueJ
+                })
+                return retAttri
+              })
+              const resultJ = result.map((row) => {
+                let output = ''
+                Object.keys(row).forEach((name) => {
+                  if (row[name])
+                    output += row[name] + ' - '
+                })
+                output = output.substring(0, output.length - 3)
+                return { output }
+              })
+
+              res.status(200).send(resultJ)
+            })
+            .catch(function (err) {
+              console.log(err)
+              res.status(500).send({ err })
+            })
+        })
+        .catch(function (err) {
+          console.log(err)
+          res.status(500).send(err)
+        })
+    })
+    .catch(function (err) {
+      console.log(err)
+      res.status(500).send(err)
+    })
+});
+
 router.get('/object', function (req, res, next) {
   let options = {
     auth: {
