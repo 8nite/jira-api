@@ -201,18 +201,18 @@ router.get('/objectsConcatAttribute', function (req, res, next) {
               res.status(200).send(resultJ)
             })
             .catch(function (err) {
-              console.log(err)
-              res.status(500).send({ err })
+              console.log(err.message)
+              res.status(500).send(err.message)
             })
         })
         .catch(function (err) {
-          console.log(err)
-          res.status(500).send(err)
+          console.log(err.message)
+          res.status(500).send(err.message)
         })
     })
     .catch(function (err) {
-      console.log(err)
-      res.status(500).send(err)
+      console.log(err.message)
+      res.status(500).send(err.message)
     })
 });
 
@@ -259,7 +259,7 @@ router.post('/objectQuery', function (req, res, next) {
     })
     .catch(function (err) {
       console.log(err)
-      res.status(500).send(err)
+      res.status(500).send(err.message)
     })
 });
 
@@ -477,7 +477,7 @@ router.get('/attributeValue', async (req, res) => {
       'page': 1,
       'resultsPerPage': 9999,
       'includeAttributes': true,
-      'iql': req.query.findAttribute + ' = "' + req.query.findValue + '"',
+      'iql': '"' + req.query.findAttribute + '" = "' + req.query.findValue + '"',
       'objectSchemaId': objectSchemaId
     },
     json: true
@@ -547,7 +547,7 @@ router.get('/2attributeValue', async (req, res) => {
           return false
         }
       }).map((item) => {
-        console.log(item[req.query.returnAttribute])
+        //console.log(item[req.query.returnAttribute])
         return item[req.query.returnAttribute]
       })
     })
