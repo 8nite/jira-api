@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "git pull && npm-run-all build server",
+    "start": "git pull && npm-run-all server",
     "startdev": "git pull && npm-run-all build serverdev",
     "dev": "nodemon --watch src/ --exec yarn startdev",
     "server": "cp -rf ./public ./dist-server/public && node ./dist-server/app",
